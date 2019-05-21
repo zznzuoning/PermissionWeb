@@ -61,11 +61,14 @@
     <Compile Include="UserRole.cs" />
     <Compile Include="ViewModel\Param\BaseSearch.cs" />
     <Compile Include="ViewModel\Param\ButtonSearch.cs" />
+    <Compile Include="ViewModel\Param\MenuSearch.cs" />
     <Compile Include="ViewModel\Param\UserDepartmentModel.cs" />
     <Compile Include="ViewModel\Param\UserRoleModel.cs" />
     <Compile Include="ViewModel\Result\ButtonList.cs" />
     <Compile Include="ViewModel\Result\ComboResult.cs" />
     <Compile Include="ViewModel\Result\IconList.cs" />
+    <Compile Include="ViewModel\Result\MenuList.cs" />
+    <Compile Include="ViewModel\Result\MenuTreeData.cs" />
     <Compile Include="ViewModel\Result\StringData.cs" />
     <Compile Include="ViewModel\Result\TreeData.cs" />
     <Compile Include="ViewModel\Result\UserList.cs" />

@@ -186,7 +186,7 @@ ChangeDateFormat = function (jsondate) {
     var date = new Date(parseInt(jsondate, 10));
     var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
     var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
-
+    var currentMinutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
     return date.getFullYear()
         + "年"
         + month
@@ -196,7 +196,7 @@ ChangeDateFormat = function (jsondate) {
         + " "
         + date.getHours()
         + ":"
-        + date.getMinutes();
+        + currentMinutes;
 }
 //接收一个以逗号分割的字符串，返回List，list里每一项都是一个字符串（做编辑功能的时候 传入id 然后自动勾选combo系列组件）
 stringToList = function (value) {

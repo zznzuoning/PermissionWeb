@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="ButtonBLL.cs" />
     <Compile Include="DepartmentBLL.cs" />
+    <Compile Include="MenuBLL.cs" />
+    <Compile Include="MenuButtonBLL.cs" />
     <Compile Include="RoleBLL.cs" />
     <Compile Include="UserBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

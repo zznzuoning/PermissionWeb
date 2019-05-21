@@ -13,54 +13,57 @@ using WebAdmin.Models;
 
 namespace WenAdmin.Controllers
 {
-    public class ButtonController : Controller
+    public class MenuController : Controller
     {
-        // GET: Button
+        // GET: Menu
         public ActionResult Index()
         {
             return View();
         }
         /// <summary>
-        /// 获取所有按钮
+        /// 获取菜单列表
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public ActionResult GetButtonList(ButtonSearch model)
+        public ActionResult GetMenuList(MenuSearch model)
         {
             int totalCount = 0;
-            Expression<Func<Button,int>> orderLambda = d => d.Sort;
-            var whereLambda = PredicateBuilder.True<Button>();
+            Expression<Func<Menu, int>> orderLambda = d => d.Sort;
+            var whereLambda = PredicateBuilder.True<Menu>();
             if (!string.IsNullOrEmpty(model.Name))
             {
                 whereLambda = whereLambda.AndAlso(d => d.Name.Contains(model.Name));
             }
-            var buttons= new ButtonBLL().Get(orderLambda,whereLambda,model.Order,model.Rows,model.Page,out totalCount);
-            var buttonList = buttons.Select(d=>new ButtonList {
-                Id=d.Id,
-                Name=d.Name,
-                Code=d.Code,
-                Icon=d.Icon,
-                Sort=d.Sort,
-                UpdateDateTime=d.UpdateTime,
-                UpdateBy=d.UpdateBy,
-                Description=d.Description
-            }).ToList();
-            var result = new DataResult<ButtonList>
+            var menus = new MenuBLL().Get(orderLambda, whereLambda, model.Order, model.Rows, model.Page, out totalCount);
+            var menusList = menus.Select(d => new MenuList
             {
-                total=totalCount,
-                rows=buttonList
-            };
-            return Json(result,JsonRequestBehavior.AllowGet);
-        }
-        public ActionResult GetIconsList()
-        {
-            var iconsList = new ButtonBLL().GetIcons();
-            var result = iconsList.Select(d=>new IconList {
-                id=d.Id,
-                text=d.IconCssInfo,
-                iconCls=d.IconCssInfo
+                Id = d.Id,
+                Name = d.Name,
+                ParentId=d.ParentId,
+                ParentName = d.ParentId.HasValue ? new MenuBLL().Find(d.ParentId.Value).Name : "顶级菜单",
+                Code = d.Code,
+                LinkAddress = d.LinkAddress,
+                Icon = d.Icon,
+                Sort = d.Sort,
+                UpdateBy = d.UpdateBy,
+                UpdateTime = d.UpdateTime
             }).ToList();
-            return Json(result,JsonRequestBehavior.AllowGet);
+            var result = new DataResult<MenuList>
+            {
+                total = totalCount,
+                rows = menusList
+            };
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 获取菜单树
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult GetMenuTree()
+        {
+            var treeData = new MenuBLL().GetMenuTreeList();
+            return Json(treeData, JsonRequestBehavior.AllowGet);
         }
         /// <summary>
         /// 添加
@@ -76,14 +79,14 @@ namespace WenAdmin.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Creat(Button model)
+        public ActionResult Creat(Menu model)
         {
             var result = new Result();
             try
             {
                 if (string.IsNullOrEmpty(model.Name))
                 {
-                    result.Msg = "按钮名称不能为空";
+                    result.Msg = "菜单名称不能为空";
                     return Json(result);
                 }
                 model.Id = Guid.NewGuid();
@@ -91,24 +94,23 @@ namespace WenAdmin.Controllers
                 model.CreateTime = DateTime.Now;
                 model.UpdateBy = "admin";
                 model.UpdateTime = DateTime.Now;
-                var button = new ButtonBLL().Create(model);
-                if (button != null)
+                var menu = new MenuBLL().Creat(model);
+                if (menu != null)
                 {
-                    result.Success = true;
                     result.Msg = "添加成功！";
+                    result.Success = true;
                 }
                 else
                 {
-                    result.Msg = "添加失败";
+                    result.Msg = "添加失败！";
                 }
                 return Json(result);
-
             }
             catch (Exception ex)
             {
-                result.Msg = string.Format("添加失败！{0}",ex.Message);
+                result.Msg = string.Format("添加失败！{0}", ex.Message);
                 return Json(result);
-            } 
+            }
         }
         /// <summary>
         /// 修改
@@ -124,23 +126,28 @@ namespace WenAdmin.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Update(Button model)
+        public ActionResult Update(Menu model)
         {
             var result = new Result();
             try
             {
+                if (model.Id == Guid.Empty)
+                {
+                    result.Msg = "菜单Id不能为空";
+                    return Json(result);
+                }
                 if (string.IsNullOrEmpty(model.Name))
                 {
-                    result.Msg = "按钮名称不能为空";
+                    result.Msg = "菜单名称不能为空";
                     return Json(result);
                 }
                 model.UpdateBy = "admin";
                 model.UpdateTime = DateTime.Now;
-                var button = new ButtonBLL().Update(model);
-                if (button != null)
+                var menu = new MenuBLL().Update(model);
+                if (menu != null)
                 {
-                    result.Success = true;
                     result.Msg = "修改成功！";
+                    result.Success = true;
                 }
                 else
                 {
@@ -150,9 +157,10 @@ namespace WenAdmin.Controllers
             }
             catch (Exception ex)
             {
-                result.Msg = string.Format("修改失败！{0}",ex.Message);
+                result.Msg = string.Format("修改失败！{0}", ex.Message);
                 return Json(result);
             }
+
         }
         /// <summary>
         /// 删除
@@ -160,17 +168,17 @@ namespace WenAdmin.Controllers
         /// <param name="ids"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult DelButtonByIDs(string ids)
+        public ActionResult Del(string ids)
         {
             var result = new Result();
             try
             {
                 if (string.IsNullOrEmpty(ids))
                 {
-                    result.Msg = "Id不能为空";
+                    result.Msg = "菜单id不能为空";
                     return Json(result);
                 }
-                var isSuccess = new ButtonBLL().Del(ids);
+                var isSuccess = new MenuBLL().Del(ids);
                 if (isSuccess)
                 {
                     result.Msg = "删除成功！";
@@ -181,13 +189,14 @@ namespace WenAdmin.Controllers
                     result.Msg = "删除失败！";
                 }
                 return Json(result);
-
             }
             catch (Exception ex)
             {
-                result.Msg = string.Format("删除失败！{0}",ex.Message);
+                result.Msg = string.Format("删除失败！", ex.Message);
                 return Json(result);
             }
+            return View();
         }
+
     }
 }

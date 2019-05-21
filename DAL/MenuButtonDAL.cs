@@ -13,32 +13,78 @@ namespace Dal
     {
         public MenuButton Create(MenuButton model)
         {
-            throw new NotImplementedException();
+            using (var db = new PermissionContext())
+            {
+                var menuButton = db.MenuButtons.Add(model);
+                db.SaveChanges();
+                return menuButton;
+            }
         }
 
         public bool Del(Guid id)
         {
-            throw new NotImplementedException();
+            using (var db = new PermissionContext())
+            {
+                var menuButton = db.MenuButtons.Find(id);
+                db.MenuButtons.Remove(menuButton);
+                return db.SaveChanges()>0;
+            }
         }
 
         public MenuButton Find(Guid id)
         {
-            throw new NotImplementedException();
+            using (var db = new PermissionContext())
+            {
+                var menuButton = db.MenuButtons.Find(id);
+                return menuButton;
+            }
         }
 
         public IEnumerable<MenuButton> Get()
         {
-            throw new NotImplementedException();
+            using (var db = new PermissionContext())
+            {
+                var menuButton = db.MenuButtons.ToList();
+                return menuButton;
+            }
         }
 
         public IEnumerable<MenuButton> Get<Tkey>(Expression<Func<MenuButton, Tkey>> orderLambda, Expression<Func<MenuButton, bool>> whereLambda, string order, int pageSize, int pageIndex, out int totalCount)
         {
-            throw new NotImplementedException();
+            using (var db = new PermissionContext())
+            {
+                var menuButtonData = db.MenuButtons.Where(whereLambda);
+                totalCount = menuButtonData.Count();
+                switch (order)
+                {
+                    case "desc":
+                        menuButtonData = menuButtonData.OrderByDescending(orderLambda);
+                        break;
+                    case "asc":
+                        menuButtonData = menuButtonData.OrderBy(orderLambda);
+                        break;
+                    default:
+                        menuButtonData = menuButtonData.OrderBy(orderLambda);
+                        break;
+                }
+
+                var menuButton = menuButtonData
+                    .Skip((pageIndex - 1) * pageSize)
+                    .Take(pageSize);
+
+                return menuButton.ToList();
+            }
         }
 
         public MenuButton Update(MenuButton model)
         {
-            throw new NotImplementedException();
+            using (var db = new PermissionContext())
+            {
+                var menuButton = db.MenuButtons.Find(model.Id);
+                menuButton = model;
+                db.SaveChanges();
+                return menuButton;
+            }
         }
     }
 }
