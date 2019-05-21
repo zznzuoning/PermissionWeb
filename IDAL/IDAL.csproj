@@ -43,6 +43,8 @@
     <Compile Include="IBaseDAL.cs" />
     <Compile Include="IButtonDAL.cs" />
     <Compile Include="IDepartmentDAL.cs" />
+    <Compile Include="IMenuButtonDAL.cs" />
+    <Compile Include="IMenuDAL.cs" />
     <Compile Include="IRoleDAL.cs" />
     <Compile Include="IUserDAL.cs" />
     <Compile Include="IUserDepartmentDAL.cs" />

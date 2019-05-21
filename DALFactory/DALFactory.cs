@@ -62,5 +62,15 @@ namespace DALFactory
             IButtonDAL dal = GetInstance("ButtonDAL") as IButtonDAL;
             return dal;
         }
+        public static IMenuDAL GetMenuDAL()
+        {
+            IMenuDAL dal = GetInstance("MenuDAL") as IMenuDAL;
+            return dal;
+        }
+        public static IMenuButtonDAL GetMenuButtonDAL()
+        {
+            IMenuButtonDAL dal = GetInstance("MenuButtonDAL") as IMenuButtonDAL;
+            return dal;
+        }
     }
 }
