@@ -34,6 +34,11 @@
             text: "删除",
             iconCls: "icon-cut",
             handler: DelMenu
+        },
+        {
+            text: "分配按钮",
+            iconCls: "icon-link",
+            handler: SetMenuButton
         }]
     });
 });
@@ -103,6 +108,7 @@ UpdateMenu = function () {
     }
     if (rows.length > 1) {
         $.show_alert("提示", "不支持批量修改菜单");
+        $("#ui_menu_dg").datagrid("clearSelections").datagrid("clearChecked")
         return;
     }
     $("<div/>").dialog({
@@ -149,37 +155,36 @@ UpdateMenu = function () {
              text: "取消",
              handler: function () {
                  $("#ui_menu_edit_dialog").dialog("destroy");
+                 $("#ui_menu_dg").datagrid("clearSelections").datagrid("clearChecked")
              }
          }],
         onLoad: function () {
             $("#hid").val(rows[0].Id);
             $("#txtName").val(rows[0].Name);
-            if (rows[0].ParentId != null)
-            {
+            if (rows[0].ParentId != null) {
                 $("#comboxParentIdTree").combotree("setValue", rows[0].ParentId);
             }
-          
+
             $("#txtCode").val(rows[0].Code);
             $("#txtLinkAddress").val(rows[0].LinkAddress);
             $("#comboxIconTree").combotree("setValue", rows[0].Icon);
-            $("#txtSort").numberspinner("setValue",rows[0].Sort);
+            $("#txtSort").numberspinner("setValue", rows[0].Sort);
         },
         onClose: function () {
             $("#ui_menu_edit_dialog").dialog("destroy");
+            $("#ui_menu_dg").datagrid("clearSelections").datagrid("clearChecked")
         }
     });
 }
 //删除(支持批量删除)
 DelMenu = function () {
     var rows = $("#ui_menu_dg").datagrid("getChecked");
-    if (rows.length < 1)
-    {
+    if (rows.length < 1) {
         $.show_alert("请选择要删除的菜单");
         return;
     }
     $.messager.confirm("提示", "确定删除选中行吗", function (isChecked) {
-        if (isChecked)
-        {
+        if (isChecked) {
             var ids = "";
             $.each(rows, function (i, row) {
                 ids += row.Id + ",";
@@ -188,9 +193,9 @@ DelMenu = function () {
             $.ajax({
                 url: "/Menu/Del",
                 data: { ids},
-                type: "Post",
-                dataType: "json",
-                success: function (data) {
+                        type: "Post",
+                        dataType: "json",
+                        success: function (data) {
                     if (data.Success) {
                         $.show_alert("提示", data.Msg);
                         $("#ui_menu_dg").datagrid("reload").datagrid("clearSelections").datagrid("clearChecked");
@@ -198,8 +203,81 @@ DelMenu = function () {
                     else {
                         $.show_alert("提示", data.Msg);
                     }
+                        }
+            });
+        }
+        else {
+            $("#ui_menu_dg").datagrid("clearSelections").datagrid("clearChecked")
+        }
+    });
+}
+SetMenuButton = function () {
+
+    var rows = $("#ui_menu_dg").datagrid("getChecked");
+    if (rows.length < 1) {
+        $.show_alert("提示", "请选择要分配的菜单");
+        return;
+    }
+    if (rows.length > 1) {
+        $.show_alert("提示", "不支持批量分配菜单");
+        $("#ui_menu_dg").datagrid("clearSelections").datagrid("clearChecked")
+        return;
+    }
+    $("<div/>").dialog({
+        id: "set_menubutton_dialog",
+        title: "分配按钮",
+        href: "/Menu/MenuButton",
+        height: 200,
+        width: 400,
+        modal: true,
+        buttons: [{
+            id: "set_menubutton_btn",
+            text: "保 存",
+            handler: function () {
+                $("#SetMenuButtonForm").form("submit", {
+                    url: "/Menu/MenuButton",
+                    onSubmit: function (param) {
+                        $("#set_menubutton_btn").linkbutton("disable");
+                        param.ButtonIds = $("#treeButton").combotree("getValues").toString();
+                        if ($(this).form("validate")) {
+                            return true;
+                        }
+                        else {
+                            $("#set_menubutton_btn").linkbutton("enable");
+                            return false;
+                        }
+                    },
+                    success: function (data) {
+                        var result = eval('(' + data + ')');
+                        if (result.Success) {
+                            $("#set_menubutton_dialog").dialog("destroy");
+                            $.show_alert("提示", result.Msg);
+                        }
+                        else {
+                            $("#set_menubutton_btn").linkbutton("enable");
+                            $.show_alert("提示", result.Msg);
+                        }
+                    }
+                });
+            }
+        }],
+        onLoad: function () {
+            
+            $("#hid").val(rows[0].Id);
+            $("#txtMenuNameDept").val(rows[0].Name);
+            $.ajax({
+                url: "/Menu/GetButtonByMenuId",
+                data: { id: rows[0].Id },
+                success: function (data) {
+                    if (data != null && data != "")
+                    {
+                        $("#treeButton").combotree("setValues", data.split(','));
+                    }
                 }
             });
+        },
+        onClose: function () {
+            $("#set_menubutton_dialog").dialog("destroy");
         }
     });
 }

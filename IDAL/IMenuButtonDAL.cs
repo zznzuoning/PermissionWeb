@@ -9,5 +9,7 @@ namespace IDAL
 {
     public interface IMenuButtonDAL : IBaseDAL<MenuButton>
     {
+        bool DelByMenuId(Guid id);
+        List<MenuButton> GetButtonByMenuId(Guid id);
     }
 }

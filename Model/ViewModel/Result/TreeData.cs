@@ -14,4 +14,13 @@ namespace Model.ViewModel.Result
         public string text { get; set; }
         public List<TreeData> children { get; set; }
     }
+    public class SingleTree : Singles
+    {
+        public List<Singles> children { get; set; }
+    }
+    public class Singles
+    {
+        public Guid id { get; set; }
+        public string text { get; set; }
+    }
 }

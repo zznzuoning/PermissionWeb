@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Entity;
 using System.Linq.Expressions;
 
-namespace Dal
+namespace DAL
 {
     public class MenuButtonDAL : IMenuButtonDAL
     {
@@ -28,6 +28,36 @@ namespace Dal
                 var menuButton = db.MenuButtons.Find(id);
                 db.MenuButtons.Remove(menuButton);
                 return db.SaveChanges()>0;
+            }
+        }
+
+        /// <summary>
+        /// 根据菜单id删除
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool DelByMenuId(Guid id)
+        {
+            using (var db = new PermissionContext())
+            {
+                var menuButtons = db.MenuButtons.Where(d => d.MenuId == id);
+                if (menuButtons.Any())
+                {
+                    if (menuButtons.Count() > 1)
+                    {
+                        db.MenuButtons.RemoveRange(menuButtons);
+                    }
+                    else
+                    {
+                        db.MenuButtons.Remove(menuButtons.FirstOrDefault());
+                    }
+                }
+                else
+                {
+                    return true;
+                }
+
+                return db.SaveChanges() > 0;
             }
         }
 
@@ -73,6 +103,15 @@ namespace Dal
                     .Take(pageSize);
 
                 return menuButton.ToList();
+            }
+        }
+
+        public List<MenuButton> GetButtonByMenuId(Guid id)
+        {
+            using (var db=new PermissionContext())
+            {
+                var menuButtons = db.MenuButtons.Where(d=>d.MenuId==id).ToList();
+                return menuButtons;
             }
         }
 

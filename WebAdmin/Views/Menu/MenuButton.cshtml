@@ -1,0 +1,44 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>分配按钮</title>
+</head>
+<body>
+    <div style="padding: 15px; overflow: hidden">
+        <form id="SetMenuButtonForm" method="post" action="">
+            <table class="tableForm" width="100%">
+                <tr>
+                    <th>
+                        菜单名称：
+                    </th>
+                    <td>
+                        <input type="hidden" id="hid" name="MenuIds" />
+                        <input type="text" name="txtMenuNameDept" id="txtMenuNameDept" class="easyui-validatebox textbox" style="width:170px;height:22px;" disabled="disabled" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        按钮：
+                    </th>
+                    <td>
+                        <select id="treeButton" name="comButtonTree" class="easyui-combotree" data-options="url:'/Menu/GetButtonList',editable:false,valueField:'id',textField:'text',multiple:true" style="width:170px;height:22px;"></select>
+                        <img style="cursor: pointer; vertical-align: middle;" onclick="$('#treeButton').combotree('clear');"
+                             alt="清空按钮" title="清空按钮" src="../Content/themes/icon/edit-clear.png" />
+                        @*<select class="easyui-combotree" id="treeButton"
+                                data-options="url: '/Menu/GetButtonList',editable:false,valueField:'id',textField:'text',multiple:true" style="width:170px;height:22px;" ></select>
+                        <img style="cursor: pointer; vertical-align: middle;" onclick="$('#treeButton').combotree('clear');"
+                             alt="清空按钮" title="清空按钮" src="../Content/themes/icon/edit-clear.png" />*@
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+</body>
+</html>

@@ -2552,6 +2552,7 @@
     <Content Include="Views\Menu\Index.cshtml" />
     <Content Include="Views\Menu\Creat.cshtml" />
     <Content Include="Views\Menu\Update.cshtml" />
+    <Content Include="Views\Menu\MenuButton.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

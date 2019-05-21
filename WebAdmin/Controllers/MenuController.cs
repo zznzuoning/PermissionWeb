@@ -39,7 +39,7 @@ namespace WenAdmin.Controllers
             {
                 Id = d.Id,
                 Name = d.Name,
-                ParentId=d.ParentId,
+                ParentId = d.ParentId,
                 ParentName = d.ParentId.HasValue ? new MenuBLL().Find(d.ParentId.Value).Name : "顶级菜单",
                 Code = d.Code,
                 LinkAddress = d.LinkAddress,
@@ -195,8 +195,93 @@ namespace WenAdmin.Controllers
                 result.Msg = string.Format("删除失败！", ex.Message);
                 return Json(result);
             }
+
+        }
+        /// <summary>
+        /// 获取所有按钮
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult GetButtonList()
+        {
+            var buttons = new ButtonBLL().Get();
+            var buttonList = buttons.OrderBy(d => d.Sort).Select(d => new Singles
+            {
+                id = d.Id,
+                text = d.Name
+            }).ToList();
+            var result = new List<SingleTree> {
+                new SingleTree
+                {
+                   id=Guid.Empty,
+                   text="全选",
+                   children=buttonList
+                }
+            };
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        /// <summary>
+        /// 根据菜单id获取按钮id
+        /// </summary>
+        /// <param name="id">菜单Id</param>
+        /// <returns></returns>
+        public ActionResult GetButtonByMenuId(Guid id)
+        {
+            var buttonIds = new MenuButtonBLL().GetButtonIdsByMenuId(id);
+            return Json(buttonIds, JsonRequestBehavior.AllowGet);
+        }
+        /// <summary>
+        /// 分配按钮
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult MenuButton()
+        {
             return View();
         }
+        /// <summary>
+        /// 分配按钮
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult MenuButton(MenuButtonModel model)
+        {
+            var result = new Result();
+            try
+            {
+                if (string.IsNullOrEmpty(model.MenuIds))
+                {
+                    result.Msg = "菜单Id不能为空";
+                    return Json(result);
+                }
+                if (model.MenuIds.Split(',').Count() > 1)
+                {
+                    result.Msg = "不支持批量分配菜单";
+                    return Json(result);
+                }
+                if (string.IsNullOrEmpty(model.ButtonIds))
+                {
+                    result.Msg = "按钮Id不能为空";
+                    return Json(result);
+                }
+                var isSuccess = new MenuButtonBLL().Creat(model);
+                if (isSuccess)
+                {
+                    result.Msg = "分配成功！";
+                    result.Success = true;
+                }
+                else
+                {
+                    result.Msg = "分配失败！";
+                }
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
 
+                result.Msg = string.Format("分配失败！{0}", ex.Message);
+                return Json(result);
+            }
+        }
     }
 }
