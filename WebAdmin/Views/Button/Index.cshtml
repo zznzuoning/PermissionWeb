@@ -1,0 +1,48 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>按钮管理</title>
+    <link href="~/Scripts/jquery-easyui-1.4.4/themes/bootstrap/easyui.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-easyui-1.4.4/jquery.min.js"></script>
+    <script src="~/Scripts/jquery-easyui-1.4.4/jquery.easyui.min.js"></script>
+    <script src="~/Scripts/jquery-easyui-1.4.4/locale/easyui-lang-zh_CN.js"></script>
+    <link href="~/Content/themes/icon.css" rel="stylesheet" />
+    <script src="~/Content/js/common.js"></script>
+    <link href="~/Content/themes/table.css" rel="stylesheet" />
+    <script src="~/Scripts/js/Home/Button.js"></script>
+</head>
+<body>
+    <div id="ui_button_layout" class="easyui-layout" data-options="fit:true,border:false">
+        <div data-options="region:'north',split:true,border:true,collapsed:false" title="搜索条件" style="height:72px;">
+            <div id="ui_button_search">
+                <table class="tableForm" style="height: 28px; background: #F5F5F5;">
+                    <tr>
+                        <th>
+                            按钮名称：
+                        </th>
+                        <td>
+                            <input name="txtUserId" id="txtUserId" class="easyui-validatebox textbox" style="width:170px;height:22px;" />
+                        </td>
+
+                        <td>
+                            <a href="javascript:void(0);" class="easyui-linkbutton" iconcls="icon-search" plain="true"
+                               onclick="ui_button_searchdata();">搜索</a>
+                            <a href="javascript:void(0);" class="easyui-linkbutton" iconcls="icon-clear" plain="true"
+                               onclick="ui_button_cleardata();">清空条件</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div data-options="region:'center',border:false">
+            <table id="ui_button_dg" data-options="fit:true,border:false"></table>
+        </div>
+    </div>
+</body>
+</html>
