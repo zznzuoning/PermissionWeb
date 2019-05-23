@@ -33,9 +33,9 @@ namespace BLL
                 }
                 var stringData = new StringData
                 {
-                    Ids= !string.IsNullOrEmpty(ids) ? ids.Substring(0, ids.Length - 1) : ids,
-                    Names= !string.IsNullOrEmpty(roles) ? roles.Substring(0, roles.Length - 1) : roles
-            };
+                    Ids = !string.IsNullOrEmpty(ids) ? ids.Substring(0, ids.Length - 1) : ids,
+                    Names = !string.IsNullOrEmpty(roles) ? roles.Substring(0, roles.Length - 1) : roles
+                };
                 return stringData;
             }
             catch (Exception)
@@ -43,6 +43,15 @@ namespace BLL
 
                 throw new Exception("出现程序错误,请联系管理员！");
             }
+        }
+        /// <summary>
+        /// 根据角色id获取所属用户
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public List<User> GetUserByRoleId<Tkey>(Guid id, Expression<Func<User, Tkey>> orderLambda, string order, int pageSize, int pageIndex, out int totalCount)
+        {
+            return dal.GetUserByRoleId(id, orderLambda, order, pageSize, pageIndex, out totalCount);
         }
 
         public Role Create(Role model)
@@ -89,7 +98,7 @@ namespace BLL
         {
             try
             {
-                return dal.Get() ;
+                return dal.Get();
             }
             catch (Exception)
             {
@@ -100,14 +109,14 @@ namespace BLL
 
         public IEnumerable<Role> Get<Tkey>(Expression<Func<Role, Tkey>> orderLambda, Expression<Func<Role, bool>> whereLambda, string order, int pageSize, int pageIndex, out int totalCount)
         {
-            throw new NotImplementedException();
+            return dal.Get(orderLambda, whereLambda, order, pageSize, pageIndex, out totalCount);
         }
 
         public Role Update(Role model)
         {
             try
             {
-                return dal.Update(model); 
+                return dal.Update(model);
             }
             catch (Exception)
             {

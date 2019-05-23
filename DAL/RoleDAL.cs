@@ -52,9 +52,31 @@ namespace DAL
             }
         }
 
-        public IEnumerable<Role> Get<Tkey>(Expression<Func<Role, Tkey>> orderLambda, Expression<Func<Role, bool>> whereLambda,string order, int pageSize, int pageIndex, out int totalCount)
+        public IEnumerable<Role> Get<Tkey>(Expression<Func<Role, Tkey>> orderLambda, Expression<Func<Role, bool>> whereLambda, string order, int pageSize, int pageIndex, out int totalCount)
         {
-            throw new NotImplementedException();
+            using (var db = new PermissionContext())
+            {
+                var roleData = db.Roles.Where(whereLambda);
+                totalCount = roleData.Count();
+                switch (order)
+                {
+                    case "desc":
+                        roleData = roleData.OrderByDescending(orderLambda);
+                        break;
+                    case "asc":
+                        roleData = roleData.OrderBy(orderLambda);
+                        break;
+                    default:
+                        roleData = roleData.OrderBy(orderLambda);
+                        break;
+                }
+
+                var role = roleData
+                    .Skip((pageIndex - 1) * pageSize)
+                    .Take(pageSize);
+
+                return role.ToList();
+            }
         }
 
         public List<Role> GetRoleByUserId(Guid id)
@@ -72,8 +94,40 @@ namespace DAL
 
                     }).ToList();
                 }
-               
+
                 return roles;
+            }
+        }
+
+        public List<User> GetUserByRoleId<Tkey>(Guid id, Expression<Func<User, Tkey>> orderLambda, string order, int pageSize, int pageIndex, out int totalCount)
+        {
+            using (var db = new PermissionContext())
+            {
+                var userList = new List<User>();
+                var userRoles = db.UserRoles.Where(d => d.RoleId == id);
+                if (userRoles.Any())
+                {
+                    var users = userRoles.Select(d => d.Users);
+
+                    switch (order)
+                    {
+                        case "desc":
+                            users = users.OrderByDescending(orderLambda);
+                            break;
+                        case "asc":
+                            users = users.OrderBy(orderLambda);
+                            break;
+                        default:
+                            users = users.OrderBy(orderLambda);
+                            break;
+                    }
+
+                    userList = users
+                        .Skip((pageIndex - 1) * pageSize)
+                        .Take(pageSize).ToList();
+                }
+                totalCount = userList.Count();
+                return userList;
             }
         }
 
@@ -82,7 +136,10 @@ namespace DAL
             using (var db = new PermissionContext())
             {
                 var role = db.Roles.Find(model.Id);
-                role = model;
+                role.RoleName = model.RoleName;
+                role.Description = model.Description;
+                role.UpdateBy = model.UpdateBy;
+                role.UpdateTime = model.UpdateTime;
                 db.SaveChanges();
 
                 return role;

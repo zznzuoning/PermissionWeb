@@ -1,0 +1,454 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Demo.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="DemoStoreContainer">
+    <EntitySet Name="Article" EntityType="Demo.Store.Article" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tb_Test" EntityType="Demo.Store.tb_Test" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tb_Test1" EntityType="Demo.Store.tb_Test1" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tbButton" EntityType="Demo.Store.tbButton" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tbDataType" EntityType="Demo.Store.tbDataType" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tbDepartment" EntityType="Demo.Store.tbDepartment" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tbFields" EntityType="Demo.Store.tbFields" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tbHtmlType" EntityType="Demo.Store.tbHtmlType" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tbIcons" EntityType="Demo.Store.tbIcons" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tbLoginIpLog" EntityType="Demo.Store.tbLoginIpLog" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tbMenu" EntityType="Demo.Store.tbMenu" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tbMenuButton" EntityType="Demo.Store.tbMenuButton" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tbNews" EntityType="Demo.Store.tbNews" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tbNewsType" EntityType="Demo.Store.tbNewsType" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tbRequestion" EntityType="Demo.Store.tbRequestion" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tbRequestionType" EntityType="Demo.Store.tbRequestionType" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tbRole" EntityType="Demo.Store.tbRole" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tbRoleMenu" EntityType="Demo.Store.tbRoleMenu" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tbRoleMenuButton" EntityType="Demo.Store.tbRoleMenuButton" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tbTable" EntityType="Demo.Store.tbTable" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tbUser" EntityType="Demo.Store.tbUser" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tbUserDepartment" EntityType="Demo.Store.tbUserDepartment" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="vw_Fields" EntityType="Demo.Store.vw_Fields" store:Type="Views" store:Schema="dbo" store:Name="vw_Fields">
+      <DefiningQuery>SELECT 
+[vw_Fields].[Id] AS [Id], 
+[vw_Fields].[TabId] AS [TabId], 
+[vw_Fields].[FieldName] AS [FieldName], 
+[vw_Fields].[FieldViewName] AS [FieldViewName], 
+[vw_Fields].[FieldDataTypeId] AS [FieldDataTypeId], 
+[vw_Fields].[IsSearch] AS [IsSearch], 
+[vw_Fields].[IsActive] AS [IsActive], 
+[vw_Fields].[Sort] AS [Sort], 
+[vw_Fields].[CreateTime] AS [CreateTime], 
+[vw_Fields].[CreateBy] AS [CreateBy], 
+[vw_Fields].[UpdateTime] AS [UpdateTime], 
+[vw_Fields].[UpdateBy] AS [UpdateBy], 
+[vw_Fields].[DataType] AS [DataType], 
+[vw_Fields].[DataTypeName] AS [DataTypeName], 
+[vw_Fields].[TabName] AS [TabName], 
+[vw_Fields].[TabViewName] AS [TabViewName]
+FROM [dbo].[vw_Fields] AS [vw_Fields]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_News" EntityType="Demo.Store.vw_News" store:Type="Views" store:Schema="dbo" store:Name="vw_News">
+      <DefiningQuery>SELECT 
+[vw_News].[id] AS [id], 
+[vw_News].[ftypeid] AS [ftypeid], 
+[vw_News].[ftitle] AS [ftitle], 
+[vw_News].[fcontent] AS [fcontent], 
+[vw_News].[CreateTime] AS [CreateTime], 
+[vw_News].[CreateBy] AS [CreateBy], 
+[vw_News].[UpdateTime] AS [UpdateTime], 
+[vw_News].[UpdateBy] AS [UpdateBy], 
+[vw_News].[ftypename] AS [ftypename], 
+[vw_News].[fsort] AS [fsort]
+FROM [dbo].[vw_News] AS [vw_News]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_requestion" EntityType="Demo.Store.vw_requestion" store:Type="Views" store:Schema="dbo" store:Name="vw_requestion">
+      <DefiningQuery>SELECT 
+[vw_requestion].[id] AS [id], 
+[vw_requestion].[ftypeid] AS [ftypeid], 
+[vw_requestion].[ftitle] AS [ftitle], 
+[vw_requestion].[fcontent] AS [fcontent], 
+[vw_requestion].[CreateTime] AS [CreateTime], 
+[vw_requestion].[CreateBy] AS [CreateBy], 
+[vw_requestion].[UpdateTime] AS [UpdateTime], 
+[vw_requestion].[UpdateBy] AS [UpdateBy], 
+[vw_requestion].[ftypename] AS [ftypename], 
+[vw_requestion].[fsort] AS [fsort]
+FROM [dbo].[vw_requestion] AS [vw_requestion]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+  <EntityType Name="Article">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="varchar" MaxLength="200" />
+    <Property Name="Content" Type="varchar" />
+    <Property Name="FilePath" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="tb_Test">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdateTime" Type="datetime" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="FName" Type="nvarchar" MaxLength="50" />
+    <Property Name="FSex" Type="nvarchar" MaxLength="50" />
+    <Property Name="FAge" Type="int" />
+  </EntityType>
+  <EntityType Name="tb_Test1">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdateTime" Type="datetime" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbButton">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="Code" Type="varchar" MaxLength="50" />
+    <Property Name="Icon" Type="varchar" MaxLength="50" />
+    <Property Name="Sort" Type="int" />
+    <Property Name="Description" Type="varchar" MaxLength="100" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdateTime" Type="datetime" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbDataType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="DataType" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="DataTypeName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Sort" Type="int" Nullable="false" />
+    <Property Name="CreateTime" Type="datetime" Nullable="false" />
+    <Property Name="CreateBy" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="UpdateTime" Type="datetime" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbDepartment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="DepartmentName" Type="varchar" MaxLength="50" />
+    <Property Name="ParentId" Type="int" />
+    <Property Name="Sort" Type="int" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdateTime" Type="datetime" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbFields">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="TabId" Type="int" Nullable="false" />
+    <Property Name="FieldName" Type="nvarchar" MaxLength="50" />
+    <Property Name="FieldViewName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="FieldDataTypeId" Type="int" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsSearch" Type="bit" />
+    <Property Name="Sort" Type="int" />
+    <Property Name="CreateTime" Type="datetime" Nullable="false" />
+    <Property Name="CreateBy" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="UpdateTime" Type="datetime" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbHtmlType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="HtmlTypeName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Sort" Type="int" />
+    <Property Name="CreateTime" Type="datetime" Nullable="false" />
+    <Property Name="CreateBy" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="UpdateTime" Type="datetime" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbIcons">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="IconName" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="IconCssInfo" Type="nvarchar" Nullable="false" MaxLength="2000" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdateTime" Type="datetime" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbLoginIpLog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="IpAddress" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdateTime" Type="datetime" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbMenu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="ParentId" Type="int" />
+    <Property Name="Code" Type="varchar" MaxLength="50" />
+    <Property Name="LinkAddress" Type="varchar" MaxLength="100" />
+    <Property Name="Icon" Type="varchar" MaxLength="50" />
+    <Property Name="Sort" Type="int" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdateTime" Type="datetime" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbMenuButton">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="MenuId" Type="int" />
+    <Property Name="ButtonId" Type="int" />
+  </EntityType>
+  <EntityType Name="tbNews">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ftypeid" Type="int" />
+    <Property Name="ftitle" Type="nvarchar" MaxLength="50" />
+    <Property Name="fcontent" Type="text" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdateTime" Type="datetime" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbNewsType">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ftypename" Type="nvarchar" MaxLength="50" />
+    <Property Name="fsort" Type="int" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdateTime" Type="datetime" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbRequestion">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ftypeid" Type="int" />
+    <Property Name="ftitle" Type="nvarchar" MaxLength="50" />
+    <Property Name="fcontent" Type="text" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdateTime" Type="datetime" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbRequestionType">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ftypename" Type="nvarchar" MaxLength="50" />
+    <Property Name="fsort" Type="int" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdateTime" Type="datetime" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="varchar" MaxLength="50" />
+    <Property Name="Description" Type="varchar" MaxLength="100" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdateTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tbRoleMenu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="RoleId" Type="int" />
+    <Property Name="MenuId" Type="int" />
+  </EntityType>
+  <EntityType Name="tbRoleMenuButton">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="RoleId" Type="int" />
+    <Property Name="MenuId" Type="int" />
+    <Property Name="ButtonId" Type="int" />
+  </EntityType>
+  <EntityType Name="tbTable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="TabName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="TabViewName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="CreateTime" Type="datetime" Nullable="false" />
+    <Property Name="CreateBy" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="UpdateTime" Type="datetime" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbUser">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="AccountName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="RealName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="MobilePhone" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsAble" Type="bit" />
+    <Property Name="IfChangePwd" Type="bit" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdateTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tbUserDepartment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="DepartmentId" Type="int" />
+  </EntityType>
+  <!--生成过程中发现错误:
+警告 6002: 表/视图“AchieveDB.dbo.vw_Fields”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+-->
+  <EntityType Name="vw_Fields">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="TabId" />
+      <PropertyRef Name="FieldViewName" />
+      <PropertyRef Name="FieldDataTypeId" />
+      <PropertyRef Name="IsActive" />
+      <PropertyRef Name="CreateTime" />
+      <PropertyRef Name="CreateBy" />
+      <PropertyRef Name="DataType" />
+      <PropertyRef Name="DataTypeName" />
+      <PropertyRef Name="TabName" />
+      <PropertyRef Name="TabViewName" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="TabId" Type="int" Nullable="false" />
+    <Property Name="FieldName" Type="nvarchar" MaxLength="50" />
+    <Property Name="FieldViewName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="FieldDataTypeId" Type="int" Nullable="false" />
+    <Property Name="IsSearch" Type="bit" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="Sort" Type="int" />
+    <Property Name="CreateTime" Type="datetime" Nullable="false" />
+    <Property Name="CreateBy" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="UpdateTime" Type="datetime" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="DataType" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="DataTypeName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="TabName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="TabViewName" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <!--生成过程中发现错误:
+警告 6002: 表/视图“AchieveDB.dbo.vw_News”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+-->
+  <EntityType Name="vw_News">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="ftypeid" Type="int" />
+    <Property Name="ftitle" Type="nvarchar" MaxLength="50" />
+    <Property Name="fcontent" Type="text" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdateTime" Type="datetime" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="ftypename" Type="nvarchar" MaxLength="50" />
+    <Property Name="fsort" Type="int" />
+  </EntityType>
+  <!--生成过程中发现错误:
+警告 6002: 表/视图“AchieveDB.dbo.vw_requestion”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+-->
+  <EntityType Name="vw_requestion">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="ftypeid" Type="int" />
+    <Property Name="ftitle" Type="nvarchar" MaxLength="50" />
+    <Property Name="fcontent" Type="text" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdateTime" Type="datetime" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="ftypename" Type="nvarchar" MaxLength="50" />
+    <Property Name="fsort" Type="int" />
+  </EntityType>
+  <Function Name="sp_CreateTable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TabName" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_GetAuthorityByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_MvcPager" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PageSize" Type="int" Mode="In" />
+    <Parameter Name="CurrentCount" Type="int" Mode="In" />
+    <Parameter Name="TableName" Type="nvarchar" Mode="In" />
+    <Parameter Name="Where" Type="nvarchar" Mode="In" />
+    <Parameter Name="Order" Type="nvarchar" Mode="In" />
+    <Parameter Name="TotalCount" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="sp_Pager" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="tableName" Type="varchar" Mode="In" />
+    <Parameter Name="columns" Type="varchar" Mode="In" />
+    <Parameter Name="order" Type="varchar" Mode="In" />
+    <Parameter Name="pageSize" Type="int" Mode="In" />
+    <Parameter Name="pageIndex" Type="int" Mode="In" />
+    <Parameter Name="where" Type="varchar" Mode="In" />
+    <Parameter Name="totalCount" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="sp_SetRoleAuthorize" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RoleId" Type="int" Mode="In" />
+    <Parameter Name="MenuButtonIds" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <!--生成过程中发现错误:
+警告 6013: 表/视图“AchieveDB.dbo.tbUserRole”未定义主键，并且无法推断有效的主键。已排除了此表/视图。若要使用实体，将需要检查您的架构、添加正确的键并取消对实体的注释。
+
+<EntityType Name="tbUserRole">
+  <Property Name="UserId" Type="int" />
+  <Property Name="RoleId" Type="int" />
+</EntityType>
+生成过程中发现错误:
+警告 6013: 表/视图“AchieveDB.dbo.test”未定义主键，并且无法推断有效的主键。已排除了此表/视图。若要使用实体，将需要检查您的架构、添加正确的键并取消对实体的注释。
+
+<EntityType Name="test">
+  <Property Name="id" Type="int" />
+  <Property Name="text" Type="nvarchar" MaxLength="200" />
+  <Property Name="name" Type="nvarchar" MaxLength="50" />
+</EntityType>-->
+</Schema>

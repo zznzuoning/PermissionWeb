@@ -31,13 +31,13 @@ namespace DAL
                 return db.SaveChanges() > 0;
             }
         }
-
+       
         public Menu Find(Guid id)
         {
             using (var db = new PermissionContext())
             {
                 var menu = db.Menus.Find(id);
-              
+
 
                 return menu;
             }

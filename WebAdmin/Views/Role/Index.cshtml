@@ -1,0 +1,52 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>角色管理</title>
+    <link href="~/Scripts/jquery-easyui-1.4.4/themes/bootstrap/easyui.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-easyui-1.4.4/jquery.min.js"></script>
+    <script src="~/Scripts/jquery-easyui-1.4.4/jquery.easyui.min.js"></script>
+    <script src="~/Scripts/jquery-easyui-1.4.4/locale/easyui-lang-zh_CN.js"></script>
+    <link href="~/Content/themes/icon.css" rel="stylesheet" />
+    <script src="~/Content/js/common.js"></script>
+    <link href="~/Content/themes/table.css" rel="stylesheet" />
+    <script src="~/Scripts/js/Role/Role.js"></script>
+</head>
+<body>
+    <div id="ui_role_layout" class="easyui-layout" data-options="fit:true,border:false">
+        <div data-options="region:'north',split:true,border:true,collapsed:false" title="搜索条件" style="height:72px;">
+            <div id="ui_role_search">
+                <table class="tableForm" style="height: 28px; background: #f5f5f5;">
+                    <tr>
+                        <th height="20px">
+                            角色名称：
+                        </th>
+                        <td>
+                            <input name="txtSearchRoleName" id="txtSearchRoleName" class="easyui-validatebox textbox" style="width:150px;height:22px;" />
+                        </td>
+                        <td>
+                            <a href="javascript:void(0);" class="easyui-linkbutton" iconcls="icon-search" plain="true"
+                               onclick="ui_role_searchdata();">搜索</a>
+                            <a href="javascript:void(0);" class="easyui-linkbutton" iconcls="icon-clear" plain="true"
+                               onclick="ui_role_cleardata();">清空条件</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div data-options="region:'east',split:true,border:true,collapsed:true" title="角色成员"
+             style="width: 480px;">
+            <table id="ui_role_user_dg" data-options="fit:true,border:false"></table>
+        </div>
+        <div data-options="region:'center',border:false">
+            <table id="ui_role_dg" data-options="fit:true,border:false"></table>
+        </div>
+    </div>
+
+</body>
+</html>

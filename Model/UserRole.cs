@@ -16,7 +16,8 @@ namespace Entity
         public Guid RoleId { get; set; }
         public virtual User Users { get; set; }
         public virtual Role Roles { get; set; }
+        
 
-       
+
     }
 }

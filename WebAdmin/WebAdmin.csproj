@@ -198,6 +198,7 @@
     <Compile Include="Controllers\ButtonController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -2526,6 +2527,7 @@
     <Content Include="Scripts\js\Button\Button.js" />
     <Content Include="Scripts\js\Home\User.js" />
     <Content Include="Scripts\js\Menu\Menu.js" />
+    <Content Include="Scripts\js\Role\Role.js" />
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
@@ -2553,6 +2555,9 @@
     <Content Include="Views\Menu\Creat.cshtml" />
     <Content Include="Views\Menu\Update.cshtml" />
     <Content Include="Views\Menu\MenuButton.cshtml" />
+    <Content Include="Views\Role\Index.cshtml" />
+    <Content Include="Views\Role\Creat.cshtml" />
+    <Content Include="Views\Role\Update.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

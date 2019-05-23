@@ -1,0 +1,358 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Demo" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="DemoEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Articles" EntityType="Demo.Article" />
+    <EntitySet Name="tb_Test" EntityType="Demo.tb_Test" />
+    <EntitySet Name="tb_Test1" EntityType="Demo.tb_Test1" />
+    <EntitySet Name="tbButtons" EntityType="Demo.tbButton" />
+    <EntitySet Name="tbDataTypes" EntityType="Demo.tbDataType" />
+    <EntitySet Name="tbDepartments" EntityType="Demo.tbDepartment" />
+    <EntitySet Name="tbFields" EntityType="Demo.tbField" />
+    <EntitySet Name="tbHtmlTypes" EntityType="Demo.tbHtmlType" />
+    <EntitySet Name="tbIcons" EntityType="Demo.tbIcon" />
+    <EntitySet Name="tbLoginIpLogs" EntityType="Demo.tbLoginIpLog" />
+    <EntitySet Name="tbMenus" EntityType="Demo.tbMenu" />
+    <EntitySet Name="tbMenuButtons" EntityType="Demo.tbMenuButton" />
+    <EntitySet Name="tbNews" EntityType="Demo.tbNew" />
+    <EntitySet Name="tbNewsTypes" EntityType="Demo.tbNewsType" />
+    <EntitySet Name="tbRequestions" EntityType="Demo.tbRequestion" />
+    <EntitySet Name="tbRequestionTypes" EntityType="Demo.tbRequestionType" />
+    <EntitySet Name="tbRoles" EntityType="Demo.tbRole" />
+    <EntitySet Name="tbRoleMenus" EntityType="Demo.tbRoleMenu" />
+    <EntitySet Name="tbRoleMenuButtons" EntityType="Demo.tbRoleMenuButton" />
+    <EntitySet Name="tbTables" EntityType="Demo.tbTable" />
+    <EntitySet Name="tbUsers" EntityType="Demo.tbUser" />
+    <EntitySet Name="tbUserDepartments" EntityType="Demo.tbUserDepartment" />
+    <EntitySet Name="vw_Fields" EntityType="Demo.vw_Fields" />
+    <EntitySet Name="vw_News" EntityType="Demo.vw_News" />
+    <EntitySet Name="vw_requestion" EntityType="Demo.vw_requestion" />
+  </EntityContainer>
+  <EntityType Name="Article">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="Content" Type="String" MaxLength="8000" Unicode="false" FixedLength="false" />
+    <Property Name="FilePath" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tb_Test">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CreateTime" Type="DateTime" />
+    <Property Name="CreateBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="UpdateTime" Type="DateTime" />
+    <Property Name="UpdateBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="FName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="FSex" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="FAge" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tb_Test1">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CreateTime" Type="DateTime" />
+    <Property Name="CreateBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="UpdateTime" Type="DateTime" />
+    <Property Name="UpdateBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tbButton">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Code" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Icon" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Sort" Type="Int32" />
+    <Property Name="Description" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="CreateTime" Type="DateTime" />
+    <Property Name="CreateBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="UpdateTime" Type="DateTime" />
+    <Property Name="UpdateBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tbDataType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DataType" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="DataTypeName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Sort" Type="Int32" Nullable="false" />
+    <Property Name="CreateTime" Type="DateTime" Nullable="false" />
+    <Property Name="CreateBy" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="UpdateTime" Type="DateTime" />
+    <Property Name="UpdateBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tbDepartment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DepartmentName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="ParentId" Type="Int32" />
+    <Property Name="Sort" Type="Int32" />
+    <Property Name="CreateTime" Type="DateTime" />
+    <Property Name="CreateBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="UpdateTime" Type="DateTime" />
+    <Property Name="UpdateBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tbField">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TabId" Type="Int32" Nullable="false" />
+    <Property Name="FieldName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="FieldViewName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="FieldDataTypeId" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="IsSearch" Type="Boolean" />
+    <Property Name="Sort" Type="Int32" />
+    <Property Name="CreateTime" Type="DateTime" Nullable="false" />
+    <Property Name="CreateBy" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="UpdateTime" Type="DateTime" />
+    <Property Name="UpdateBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tbHtmlType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HtmlTypeName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Sort" Type="Int32" />
+    <Property Name="CreateTime" Type="DateTime" Nullable="false" />
+    <Property Name="CreateBy" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="UpdateTime" Type="DateTime" />
+    <Property Name="UpdateBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tbIcon">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IconName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="IconCssInfo" Type="String" Nullable="false" MaxLength="2000" Unicode="true" FixedLength="false" />
+    <Property Name="CreateTime" Type="DateTime" />
+    <Property Name="CreateBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="UpdateTime" Type="DateTime" />
+    <Property Name="UpdateBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tbLoginIpLog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IpAddress" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="CreateTime" Type="DateTime" />
+    <Property Name="CreateBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="UpdateTime" Type="DateTime" />
+    <Property Name="UpdateBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tbMenu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="ParentId" Type="Int32" />
+    <Property Name="Code" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="LinkAddress" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="Icon" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Sort" Type="Int32" />
+    <Property Name="CreateTime" Type="DateTime" />
+    <Property Name="CreateBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="UpdateTime" Type="DateTime" />
+    <Property Name="UpdateBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tbMenuButton">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MenuId" Type="Int32" />
+    <Property Name="ButtonId" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tbNew">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ftypeid" Type="Int32" />
+    <Property Name="ftitle" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="fcontent" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="CreateTime" Type="DateTime" />
+    <Property Name="CreateBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="UpdateTime" Type="DateTime" />
+    <Property Name="UpdateBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tbNewsType">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ftypename" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="fsort" Type="Int32" />
+    <Property Name="CreateTime" Type="DateTime" />
+    <Property Name="CreateBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="UpdateTime" Type="DateTime" />
+    <Property Name="UpdateBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tbRequestion">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ftypeid" Type="Int32" />
+    <Property Name="ftitle" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="fcontent" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="CreateTime" Type="DateTime" />
+    <Property Name="CreateBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="UpdateTime" Type="DateTime" />
+    <Property Name="UpdateBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tbRequestionType">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ftypename" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="fsort" Type="Int32" />
+    <Property Name="CreateTime" Type="DateTime" />
+    <Property Name="CreateBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="UpdateTime" Type="DateTime" />
+    <Property Name="UpdateBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tbRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Description" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="CreateBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="CreateTime" Type="DateTime" />
+    <Property Name="UpdateBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="UpdateTime" Type="DateTime" />
+  </EntityType>
+  <EntityType Name="tbRoleMenu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleId" Type="Int32" />
+    <Property Name="MenuId" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tbRoleMenuButton">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleId" Type="Int32" />
+    <Property Name="MenuId" Type="Int32" />
+    <Property Name="ButtonId" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tbTable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TabName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="TabViewName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="CreateTime" Type="DateTime" Nullable="false" />
+    <Property Name="CreateBy" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="UpdateTime" Type="DateTime" />
+    <Property Name="UpdateBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tbUser">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AccountName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="RealName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="MobilePhone" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Email" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="IsAble" Type="Boolean" />
+    <Property Name="IfChangePwd" Type="Boolean" />
+    <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="CreateBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="CreateTime" Type="DateTime" />
+    <Property Name="UpdateBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="UpdateTime" Type="DateTime" />
+  </EntityType>
+  <EntityType Name="tbUserDepartment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="DepartmentId" Type="Int32" />
+  </EntityType>
+  <EntityType Name="vw_Fields">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="TabId" />
+      <PropertyRef Name="FieldViewName" />
+      <PropertyRef Name="FieldDataTypeId" />
+      <PropertyRef Name="IsActive" />
+      <PropertyRef Name="CreateTime" />
+      <PropertyRef Name="CreateBy" />
+      <PropertyRef Name="DataType" />
+      <PropertyRef Name="DataTypeName" />
+      <PropertyRef Name="TabName" />
+      <PropertyRef Name="TabViewName" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="TabId" Type="Int32" Nullable="false" />
+    <Property Name="FieldName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="FieldViewName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="FieldDataTypeId" Type="Int32" Nullable="false" />
+    <Property Name="IsSearch" Type="Boolean" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="Sort" Type="Int32" />
+    <Property Name="CreateTime" Type="DateTime" Nullable="false" />
+    <Property Name="CreateBy" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="UpdateTime" Type="DateTime" />
+    <Property Name="UpdateBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="DataType" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="DataTypeName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="TabName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="TabViewName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="vw_News">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="ftypeid" Type="Int32" />
+    <Property Name="ftitle" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="fcontent" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="CreateTime" Type="DateTime" />
+    <Property Name="CreateBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="UpdateTime" Type="DateTime" />
+    <Property Name="UpdateBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="ftypename" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="fsort" Type="Int32" />
+  </EntityType>
+  <EntityType Name="vw_requestion">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="ftypeid" Type="Int32" />
+    <Property Name="ftitle" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="fcontent" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="CreateTime" Type="DateTime" />
+    <Property Name="CreateBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="UpdateTime" Type="DateTime" />
+    <Property Name="UpdateBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="ftypename" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="fsort" Type="Int32" />
+  </EntityType>
+</Schema>
