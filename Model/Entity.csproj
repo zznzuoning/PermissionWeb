@@ -38,6 +38,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -63,12 +64,16 @@
     <Compile Include="ViewModel\Param\ButtonSearch.cs" />
     <Compile Include="ViewModel\Param\MenuButtonModel.cs" />
     <Compile Include="ViewModel\Param\MenuSearch.cs" />
+    <Compile Include="ViewModel\Param\RoleMenuModel.cs" />
     <Compile Include="ViewModel\Param\RoleSearch.cs" />
     <Compile Include="ViewModel\Param\UserDepartmentModel.cs" />
     <Compile Include="ViewModel\Param\UserRoleModel.cs" />
     <Compile Include="ViewModel\Result\ButtonList.cs" />
     <Compile Include="ViewModel\Result\ComboResult.cs" />
+    <Compile Include="ViewModel\Result\DistinctMenu.cs" />
     <Compile Include="ViewModel\Result\IconList.cs" />
+    <Compile Include="ViewModel\Result\MenuButtonList.cs" />
+    <Compile Include="ViewModel\Result\MenuButtonTree.cs" />
     <Compile Include="ViewModel\Result\MenuList.cs" />
     <Compile Include="ViewModel\Result\MenuTreeData.cs" />
     <Compile Include="ViewModel\Result\RoleList.cs" />

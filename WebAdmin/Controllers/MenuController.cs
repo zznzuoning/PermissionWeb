@@ -55,6 +55,17 @@ namespace WenAdmin.Controllers
             };
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+        /// <summary>
+        /// 根据角色id获取菜单按钮
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult GetAllRoleMenuButtonTree(Guid Id)
+        {
+          
+            var result = new MenuBLL().GetAllMenuButton(Id);
+            return Json(result,JsonRequestBehavior.AllowGet); 
+        }
 
         /// <summary>
         /// 获取菜单树

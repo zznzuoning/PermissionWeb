@@ -13,5 +13,8 @@ namespace IDAL
         List<Role> GetRoleByUserId(Guid id);
 
         List<User> GetUserByRoleId<Tkey>(Guid id, Expression<Func<User, Tkey>> orderLambda, string order, int pageSize, int pageIndex, out int totalCount);
+
+        bool DelRoleMenuButtonByRoleId(Guid id);
+        RoleMenuButton Authorize(RoleMenuButton model);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Entity;
 using IDAL;
+using Model.ViewModel.Param;
 using Model.ViewModel.Result;
 using System;
 using System.Collections.Generic;
@@ -117,6 +118,42 @@ namespace BLL
             try
             {
                 return dal.Update(model);
+            }
+            catch (Exception)
+            {
+
+                throw new Exception("出现程序错误,请联系管理员！");
+            }
+        }
+        public bool Authorize(RoleMenuModel model)
+        {
+            try
+            {
+                var isDel = dal.DelRoleMenuButtonByRoleId(model.RoleId);
+                if (isDel)
+                {
+                    foreach (var item in model.MenuButtonIds)
+                    {
+                        var roleMenuButton = new RoleMenuButton
+                        {
+                            Id = Guid.NewGuid(),
+                            RoleId = model.RoleId,
+                            ButtonId = item.buttonid,
+                            MenuId = item.menuid
+                        };
+                        var roleMenuButtons = dal.Authorize(roleMenuButton);
+                        if (roleMenuButtons == null)
+                        {
+                            throw new Exception("循环添加出现程序错误,请联系管理员！");
+                        }
+                        
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+                return true;
             }
             catch (Exception)
             {

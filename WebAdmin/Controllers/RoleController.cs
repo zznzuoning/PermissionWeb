@@ -211,5 +211,49 @@ namespace WenAdmin.Controllers
                 return Json(result);
             }
         }
+        /// <summary>
+        /// 角色授权
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult RoleMenu()
+        {
+            return View();
+        }
+
+
+        /// <summary>
+        /// 角色授权
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult RoleMenu(RoleMenuModel model)
+        {
+            var result = new Result();
+            try
+            {
+                if (model.RoleId == Guid.Empty)
+                {
+                    result.Msg = "角色Id不能为空";
+                    return Json(result);
+                }
+                var isSuceess = new RoleBLL().Authorize(model);
+                if (isSuceess)
+                {
+                    result.Msg = "授权成功！";
+                    result.Success = true;
+                }
+                else
+                {
+                    result.Msg = "授权失败！";
+                }
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
+
+                result.Msg = string.Format("授权失败！{0}", ex.Message);
+                return Json(result);
+            }
+        }
     }
 }

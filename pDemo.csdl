@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="pDemo" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="pDemoEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C__MigrationHistory" EntityType="pDemo.C__MigrationHistory" />
+    <EntitySet Name="Buttons" EntityType="pDemo.Button" />
+    <EntitySet Name="Departments" EntityType="pDemo.Department" />
+    <EntitySet Name="Icons" EntityType="pDemo.Icon" />
+    <EntitySet Name="Menus" EntityType="pDemo.Menu" />
+    <EntitySet Name="MenuButtons" EntityType="pDemo.MenuButton" />
+    <EntitySet Name="Roles" EntityType="pDemo.Role" />
+    <EntitySet Name="RoleMenuButtons" EntityType="pDemo.RoleMenuButton" />
+    <EntitySet Name="Users" EntityType="pDemo.User" />
+    <EntitySet Name="UserDepartments" EntityType="pDemo.UserDepartment" />
+    <EntitySet Name="UserRoles" EntityType="pDemo.UserRole" />
+    <AssociationSet Name="FK_dbo_MenuButton_dbo_Button_ButtonId" Association="pDemo.FK_dbo_MenuButton_dbo_Button_ButtonId">
+      <End Role="Button" EntitySet="Buttons" />
+      <End Role="MenuButton" EntitySet="MenuButtons" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_UserDepartment_dbo_Department_DepartmentId" Association="pDemo.FK_dbo_UserDepartment_dbo_Department_DepartmentId">
+      <End Role="Department" EntitySet="Departments" />
+      <End Role="UserDepartment" EntitySet="UserDepartments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_MenuButton_dbo_Menu_MenuId" Association="pDemo.FK_dbo_MenuButton_dbo_Menu_MenuId">
+      <End Role="Menu" EntitySet="Menus" />
+      <End Role="MenuButton" EntitySet="MenuButtons" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_UserRole_dbo_Role_RoleId" Association="pDemo.FK_dbo_UserRole_dbo_Role_RoleId">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="UserRole" EntitySet="UserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_UserDepartment_dbo_User_UserId" Association="pDemo.FK_dbo_UserDepartment_dbo_User_UserId">
+      <End Role="User" EntitySet="Users" />
+      <End Role="UserDepartment" EntitySet="UserDepartments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_UserRole_dbo_User_UserId" Association="pDemo.FK_dbo_UserRole_dbo_User_UserId">
+      <End Role="User" EntitySet="Users" />
+      <End Role="UserRole" EntitySet="UserRoles" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" Unicode="true" FixedLength="false" />
+    <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" Unicode="true" FixedLength="false" />
+    <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Button">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Code" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Icon" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Sort" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="CreateBy" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="CreateTime" Type="DateTime" Nullable="false" />
+    <Property Name="UpdateBy" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="UpdateTime" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="MenuButtons" Relationship="pDemo.FK_dbo_MenuButton_dbo_Button_ButtonId" FromRole="Button" ToRole="MenuButton" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="ParentId" Type="Guid" Nullable="false" />
+    <Property Name="Sort" Type="Int32" Nullable="false" />
+    <Property Name="CreateBy" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="CreateTime" Type="DateTime" Nullable="false" />
+    <Property Name="UpdateBy" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="UpdateTime" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="UserDepartments" Relationship="pDemo.FK_dbo_UserDepartment_dbo_Department_DepartmentId" FromRole="Department" ToRole="UserDepartment" />
+  </EntityType>
+  <EntityType Name="Icon">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="IconName" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="IconCssInfo" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="CreateBy" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="CreateTime" Type="DateTime" Nullable="false" />
+    <Property Name="UpdateBy" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="UpdateTime" Type="DateTime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="ParentId" Type="Guid" />
+    <Property Name="Code" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="LinkAddress" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Icon" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Sort" Type="Int32" Nullable="false" />
+    <Property Name="CreateBy" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="CreateTime" Type="DateTime" Nullable="false" />
+    <Property Name="UpdateBy" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="UpdateTime" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="MenuButtons" Relationship="pDemo.FK_dbo_MenuButton_dbo_Menu_MenuId" FromRole="Menu" ToRole="MenuButton" />
+  </EntityType>
+  <EntityType Name="MenuButton">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="MenuId" Type="Guid" Nullable="false" />
+    <Property Name="ButtonId" Type="Guid" Nullable="false" />
+    <NavigationProperty Name="Button" Relationship="pDemo.FK_dbo_MenuButton_dbo_Button_ButtonId" FromRole="MenuButton" ToRole="Button" />
+    <NavigationProperty Name="Menu" Relationship="pDemo.FK_dbo_MenuButton_dbo_Menu_MenuId" FromRole="MenuButton" ToRole="Menu" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="RoleName" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="CreateBy" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="CreateTime" Type="DateTime" Nullable="false" />
+    <Property Name="UpdateBy" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="UpdateTime" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="UserRoles" Relationship="pDemo.FK_dbo_UserRole_dbo_Role_RoleId" FromRole="Role" ToRole="UserRole" />
+  </EntityType>
+  <EntityType Name="RoleMenuButton">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="RoleId" Type="Guid" Nullable="false" />
+    <Property Name="MenuId" Type="Guid" Nullable="false" />
+    <Property Name="ButtonId" Type="Guid" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="AccountName" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="PassWord" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="RealName" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="MobilePhone" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Email" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="IsAble" Type="Boolean" Nullable="false" />
+    <Property Name="IsChangePwd" Type="Boolean" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="CreateBy" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="CreateTime" Type="DateTime" Nullable="false" />
+    <Property Name="UpdateBy" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="UpdateTime" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="UserDepartments" Relationship="pDemo.FK_dbo_UserDepartment_dbo_User_UserId" FromRole="User" ToRole="UserDepartment" />
+    <NavigationProperty Name="UserRoles" Relationship="pDemo.FK_dbo_UserRole_dbo_User_UserId" FromRole="User" ToRole="UserRole" />
+  </EntityType>
+  <EntityType Name="UserDepartment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="UserId" Type="Guid" Nullable="false" />
+    <Property Name="DepartmentId" Type="Guid" Nullable="false" />
+    <NavigationProperty Name="Department" Relationship="pDemo.FK_dbo_UserDepartment_dbo_Department_DepartmentId" FromRole="UserDepartment" ToRole="Department" />
+    <NavigationProperty Name="User" Relationship="pDemo.FK_dbo_UserDepartment_dbo_User_UserId" FromRole="UserDepartment" ToRole="User" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="UserId" Type="Guid" Nullable="false" />
+    <Property Name="RoleId" Type="Guid" Nullable="false" />
+    <NavigationProperty Name="Role" Relationship="pDemo.FK_dbo_UserRole_dbo_Role_RoleId" FromRole="UserRole" ToRole="Role" />
+    <NavigationProperty Name="User" Relationship="pDemo.FK_dbo_UserRole_dbo_User_UserId" FromRole="UserRole" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_dbo_MenuButton_dbo_Button_ButtonId">
+    <End Role="Button" Type="pDemo.Button" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="MenuButton" Type="pDemo.MenuButton" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Button">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MenuButton">
+        <PropertyRef Name="ButtonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_UserDepartment_dbo_Department_DepartmentId">
+    <End Role="Department" Type="pDemo.Department" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserDepartment" Type="pDemo.UserDepartment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserDepartment">
+        <PropertyRef Name="DepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_MenuButton_dbo_Menu_MenuId">
+    <End Role="Menu" Type="pDemo.Menu" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="MenuButton" Type="pDemo.MenuButton" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Menu">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MenuButton">
+        <PropertyRef Name="MenuId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_UserRole_dbo_Role_RoleId">
+    <End Role="Role" Type="pDemo.Role" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserRole" Type="pDemo.UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_UserDepartment_dbo_User_UserId">
+    <End Role="User" Type="pDemo.User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserDepartment" Type="pDemo.UserDepartment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserDepartment">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_UserRole_dbo_User_UserId">
+    <End Role="User" Type="pDemo.User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserRole" Type="pDemo.UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

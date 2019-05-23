@@ -45,7 +45,7 @@
         {
             text: "角色授权",
             iconCls: "icon-key",
-            handler: function () { }
+            handler: RoleAuthorize
         }],
         onSelect: function (rowIndex, rowData) {
             if (oldSelectRoleId == rowData.Id) {
@@ -217,6 +217,82 @@ function UpdateRole()
         },
         onClose: function () {
             $("#ui_role_eidt_dialog").dialog("destroy");
+        }
+    });
+}
+function RoleAuthorize() {
+    var rows = $("#ui_role_dg").datagrid("getChecked");
+    if (rows.length < 1)
+    {
+        $.show_alert("提示", "请先勾选要授权的角色");
+        return;
+    }
+    if (rows.length > 1) {
+        $.show_alert("提示", "不支持批量角色授权");
+        return;
+    }
+    $("<div/>").dialog({
+        id: "ui_role_authorize_dialog",
+        href: "/Role/RoleMenu",
+        title:"角色授权:"+rows[0].Name,
+        height: 500,
+        width: 300,
+        modal: true,
+        buttons: [{
+            id: "ui_role_authorize_btn",
+            text: "授 权",
+            handler: function () {
+                $('#ui_role_authorize_btn').linkbutton('disable');
+                var nodes = $('#treerolemenu').tree('getChecked');
+                var arr = [];
+                for (var i in nodes) {
+                    if (nodes[i].attributes.buttonid != null) {
+                        arr.push(nodes[i].attributes);
+                    }
+                }
+
+                $.ajax({
+                    url: "/Role/RoleMenu",
+                    data: {
+                        RoleId: rows[0].Id,
+                        MenuButtonIds: arr
+                    },
+                    type:"Post",
+                    dataType:"json",
+                    success: function (data) {
+                        if (data.Success) {
+                            $("#ui_role_authorize_dialog").dialog("destroy");
+                            $.show_alert("提示", data.Msg);
+                            $("#ui_role_dg").datagrid("reload").datagrid("clearSelections").datagrid("clearChecked");
+                        }
+                        else {
+                            $('#ui_role_authorize_btn').linkbutton('enable');
+                            $.show_alert("提示", data.Msg);
+                        }
+
+                    }
+                });
+            }
+        }],
+        onLoad: function () {
+            $('#treerolemenu').tree({
+                url: "/Menu/GetAllRoleMenuButtonTree?Id=" + rows[0].Id,
+                checkbox:true,
+                loadFilter: function(data){
+                        return data;
+                },
+                onBeforeExpand: function (node) {
+                    if (node.children.length == 0) {
+                        return false;
+                    }
+                    else {
+                        return true;
+                    }
+                }
+            });
+        },
+        onClose: function () {
+            $("#ui_role_authorize_dialog").dialog("destroy");
         }
     });
 }

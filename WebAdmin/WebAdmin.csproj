@@ -2558,6 +2558,7 @@
     <Content Include="Views\Role\Index.cshtml" />
     <Content Include="Views\Role\Creat.cshtml" />
     <Content Include="Views\Role\Update.cshtml" />
+    <Content Include="Views\Role\RoleMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

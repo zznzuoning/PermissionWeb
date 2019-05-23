@@ -11,6 +11,16 @@ namespace DAL
 {
     public class RoleDAL : IRoleDAL
     {
+        public RoleMenuButton Authorize(RoleMenuButton model)
+        {
+            using (var db=new PermissionContext())
+            {
+                var roleMenuButton = db.RoleMenuButtons.Add(model);
+                db.SaveChanges();
+                return roleMenuButton;
+            }
+        }
+
         public Role Create(Role model)
         {
             using (var db = new PermissionContext())
@@ -27,6 +37,31 @@ namespace DAL
             {
                 var role = db.Roles.Find(id);
                 db.Roles.Remove(role);
+
+                return db.SaveChanges() > 0;
+            }
+        }
+
+        public bool DelRoleMenuButtonByRoleId(Guid id)
+        {
+            using (var db = new PermissionContext())
+            {
+                var roleMenubuttons = db.RoleMenuButtons.Where(d => d.RoleId == id);
+                if (roleMenubuttons.Any())
+                {
+                    if (roleMenubuttons.Count() > 1)
+                    {
+                        db.RoleMenuButtons.RemoveRange(roleMenubuttons);
+                    }
+                    else
+                    {
+                        db.RoleMenuButtons.Remove(roleMenubuttons.FirstOrDefault());
+                    }
+                }
+                else
+                {
+                    return true;
+                }
 
                 return db.SaveChanges() > 0;
             }
