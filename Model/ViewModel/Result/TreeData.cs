@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Model.ViewModel.Result
+namespace Entity.ViewModel.Result
 {
     public class TreeData
     {
@@ -22,5 +22,18 @@ namespace Model.ViewModel.Result
     {
         public Guid id { get; set; }
         public string text { get; set; }
+    }
+
+    /// <summary>
+    /// 功能导航用户菜单树
+    /// </summary>
+    public class UserMenutree
+    {
+        public Guid id { get; set; }
+        public string text { get; set; }
+        public string iconCls { get; set; }
+        public string attributes { get; set; }
+        public string state { get; set; }
+        public List<UserMenutree> children { get; set; }
     }
 }

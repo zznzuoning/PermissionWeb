@@ -243,12 +243,10 @@ function RoleAuthorize() {
             text: "授 权",
             handler: function () {
                 $('#ui_role_authorize_btn').linkbutton('disable');
-                var nodes = $('#treerolemenu').tree('getChecked');
+                var nodes = $('#treerolemenu').tree('getChecked', ['checked', 'indeterminate'])
                 var arr = [];
                 for (var i in nodes) {
-                    if (nodes[i].attributes.buttonid != null) {
-                        arr.push(nodes[i].attributes);
-                    }
+                        arr.push(nodes[i].attributes); 
                 }
 
                 $.ajax({

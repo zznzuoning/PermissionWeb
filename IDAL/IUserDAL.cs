@@ -11,6 +11,8 @@ namespace IDAL
     /// </summary>
     public interface IUserDAL : IBaseDAL<User>
     {
-      
+        bool ValidateUser(User model);
+        User GetUserByName(string userName);
+        bool UpdatePwd(User model);
     }
 }

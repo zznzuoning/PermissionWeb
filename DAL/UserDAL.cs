@@ -57,7 +57,7 @@ namespace DAL
             }
         }
 
-        public IEnumerable<User> Get<Tkey>(Expression<Func<User, Tkey>> orderLambda, Expression<Func<User, bool>> whereLambda,string order, int pageSize, int pageIndex, out int totalCount)
+        public IEnumerable<User> Get<Tkey>(Expression<Func<User, Tkey>> orderLambda, Expression<Func<User, bool>> whereLambda, string order, int pageSize, int pageIndex, out int totalCount)
         {
             using (var db = new PermissionContext())
             {
@@ -66,7 +66,7 @@ namespace DAL
                 switch (order)
                 {
                     case "desc":
-                        userData= userData.OrderByDescending(orderLambda);
+                        userData = userData.OrderByDescending(orderLambda);
                         break;
                     case "asc":
                         userData = userData.OrderBy(orderLambda);
@@ -81,6 +81,15 @@ namespace DAL
                     .Take(pageSize);
 
                 return user.ToList();
+            }
+        }
+
+        public User GetUserByName(string userName)
+        {
+            using (var db = new PermissionContext())
+            {
+                var user = db.Users.FirstOrDefault(d => d.AccountName == userName);
+                return user;
             }
         }
 
@@ -99,6 +108,33 @@ namespace DAL
                 db.SaveChanges();
                 return user;
 
+            }
+        }
+        /// <summary>
+        /// 修改密码
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool UpdatePwd(User model)
+        {
+            using (var db = new PermissionContext())
+            {
+                var user = db.Users.Find(model.Id); ;
+                user.PassWord = model.PassWord;
+                user.IsChangePwd = true;
+                user.UpdateBy = model.UpdateBy;
+                user.UpdateTime = DateTime.Now;           
+                return db.SaveChanges()>0;
+
+            }
+        }
+
+        public bool ValidateUser(User model)
+        {
+            using (var db = new PermissionContext())
+            {
+                var user = db.Users.FirstOrDefault(d => d.AccountName == model.AccountName && d.PassWord == model.PassWord);
+                return user != null;
             }
         }
     }

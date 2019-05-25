@@ -1,7 +1,7 @@
 ﻿$(function () {
 
     $("#ui_user_dg").datagrid({
-        url: "/Home/GetAllUserInfo",
+        url: "/User/GetAllUserInfo",
         striped: true, rownumbers: true, pagination: true, pageSize: 20,
         idField: 'Id',
         sortName: 'UpdateTime',
@@ -75,7 +75,7 @@
 function AddUser() {
     $("<div/>").dialog({
         id: "ui_user_add_dialog",
-        href: "/Home/CreatUser",
+        href: "/User/CreatUser",
         title: "添加用户",
         height: 370,
         width: 610,
@@ -85,7 +85,7 @@ function AddUser() {
             text: "添加",
             handler: function () {
                 $("#UserAddForm").form("submit", {
-                    url: "/Home/AddUser",
+                    url: "/User/AddUser",
                     onSubmit: function (param) {
                         param.IsAble = $("#selUserIsableAdd").get(0).checked;
                         param.IsChangePwd = $("#selIfChangepwdAdd").get(0).checked;
@@ -143,7 +143,7 @@ function UpdateUser() {
     $("<div/>").dialog({
         id: "ui_user_edit_dialog",
         title: "修改用户",
-        href: "/Home/UpdateUser",
+        href: "/User/UpdateUser",
         height: 370,
         width: 610,
         modal: true,
@@ -152,7 +152,7 @@ function UpdateUser() {
             text: "修 改",
             handler: function () {
                 $("#UserUpdateForm").form("submit", {
-                    url: "/Home/UpdateUser",
+                    url: "/User/UpdateUser",
                     onSubmit: function (param) {
                         param.IsAble = $("#selUserIsableEdit").get(0).checked;
                         param.IsChangePwd = $("#selIsChangepwdEdit").get(0).checked;
@@ -188,7 +188,7 @@ function UpdateUser() {
         onLoad: function () {
             var id = rows[0].Id;
             $.ajax({
-                url: "/Home/GetUserById",
+                url: "/User/GetUserById",
                 data: {
                     id
                     },
@@ -231,7 +231,7 @@ function SetUserRole() {
     }
     $("<div/>").dialog({
         id: "ui_user_setrole_dialog",
-        href: "/Home/UserRole",
+        href: "/User/UserRole",
         title: rows.length == 1 ? "设置角色" : "批量设置角色：" + rows.length + "个用户",
         height: 220,
         width: 380,
@@ -241,7 +241,7 @@ function SetUserRole() {
             text: "确定",
             handler: function () {
                 $("#SetRoleForm").form("submit", {
-                    url: "/Home/UserRole",
+                    url: "/User/UserRole",
                     onSubmit: function (param) {
                         $("#ui_user_setrole_btn").linkbutton("disable");
                         param.RoleIds = $("#comboxrole").combobox("getValues");
@@ -291,7 +291,7 @@ function SetUserDepartment() {
     }
     $("<div/>").dialog({
         id: "ui_user_setdepartment_dialog",
-        href: "/Home/UserDepartment",
+        href: "/User/UserDepartment",
         title: rows.length == 1 ? "设置部门" : "批量设置部门：" + rows.length + "个用户",
         height: 220,
         width: 380,
@@ -301,7 +301,7 @@ function SetUserDepartment() {
             text: "确定",
             handler: function () {
                 $("#SetUserDeptForm").form("submit", {
-                    url: "/Home/UserDepartment",
+                    url: "/User/UserDepartment",
                     onSubmit: function (param) {
                         $("#ui_user_setdepartment_btn").linkbutton("disable");
                         param.DepartmentIds = $("#treeDepartmentParentId").combotree("getValues").toString();

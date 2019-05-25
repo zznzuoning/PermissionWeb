@@ -6,72 +6,48 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>用户管理</title>
+    <title>后台权限管理首页</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="shortcut icon" type="image/ico" href="~/Content/themes/icon/user_home.png" />
     <link href="~/Scripts/jquery-easyui-1.4.4/themes/bootstrap/easyui.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-easyui-1.4.4/jquery.min.js"></script>
     <script src="~/Scripts/jquery-easyui-1.4.4/jquery.easyui.min.js"></script>
     <script src="~/Scripts/jquery-easyui-1.4.4/locale/easyui-lang-zh_CN.js"></script>
-    <link href="~/Content/themes/icon.css" rel="stylesheet" />
     <script src="~/Content/js/common.js"></script>
+    <script src="~/Scripts/js/init.js"></script>
     <link href="~/Content/themes/table.css" rel="stylesheet" />
-    <script src="~/Scripts/js/Home/User.js"></script>
+    <link href="~/Content/themes/icon.css" rel="stylesheet" />
 </head>
-<body>
-    <div id="ui_user_layout" class="easyui-layout" data-options="fit:true,border:false">
-        <div data-options="region:'north',split:true,border:true,collapsed:false" title="搜索条件" style="height:104px;">
-            <div id="ui_user_search">
-                <table class="tableForm" style="width: 99%; height: 100%; background: #F5F5F5;">
-                    <tr>
-                        <th>
-                            登录名：
-                        </th>
-                        <td>
-                            <input name="txtUserId" id="txtUserId" class="easyui-validatebox textbox" style="width:150px;height:22px;" />
-                        </td>
-
-                        <th>
-                            用户名称：
-                        </th>
-                        <td>
-                            <input name="txtUserName" id="txtUserName" class="easyui-validatebox textbox" style="width:150px;height:22px;" />
-                        </td>
-
-                    </tr>
-                    <tr>
-
-                        <th>
-                            是否启用：
-                        </th>
-                        <td>
-                            <select name="selUserIsable" id="selUserIsable">
-                                <option value="select">请选择</option>
-                                <option value="true">已启用</option>
-                                <option value="false">未启用</option>
-                            </select>
-                        </td>
-                        <th>
-                            是否改密：
-                        </th>
-                        <td>
-                            <select name="selIfChangepwd" id="selIfChangepwd">
-                                <option value="select">请选择</option>
-                                <option value="true">已改密</option>
-                                <option value="false">未改密</option>
-                            </select>
-                        </td>
-                        <td colspan="4">
-                            <a href="javascript:void(0);" class="easyui-linkbutton" iconcls="icon-search" plain="true"
-                               onclick="ui_user_searchdata();">搜索</a>
-                            <a href="javascript:void(0);" class="easyui-linkbutton" iconcls="icon-clear" plain="true"
-                               onclick="ui_user_cleardata();">清空条件</a>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+<body class="easyui-layout">
+    <div data-options="region:'north',border:false" style="height: 60px; background-color: #F5F5F5; padding: 10px; font-size: x-large;">
+        <img src="~/Content/images/Logo.png" /> 后台权限管理系统
+        <div style="position: absolute; right: 5px; top: 10px;">
+            欢迎您：<span style="color: #0082ff; ">@ViewBag.RealName</span>  @ViewBag.TimeView   @ViewBag.DayDate
         </div>
-        <div data-options="region:'center',border:false">
-            <table id="ui_user_dg" data-options="fit:true,border:false"></table>
+        <div style="position: absolute; right: 0px; bottom: 0px; ">
+            <a href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-set1'" onclick="changePwd('');">
+                修改密码
+            </a>
+            <a href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-stop'" onclick="loginOut();">
+                退出系统
+            </a>
+        </div>
+    </div>
+    @*旧版 菜单树 保留不使用*@
+    @*<div data-options="region:'west',split:true,title:'功能导航'" style="width: 180px; padding: 10px; background-color: white;">
+            <div>
+                <ul id="LeftMenuTree"></ul>
+            </div>
+        </div>*@
+    <div data-options="region:'west',split:true,title:'功能导航'" style="width: 180px; background-color: white;">
+        <div id="RightAccordion" class="easyui-accordion">
+        </div>
+    </div>
+    <div data-options="region:'center'">
+        <div id="tabs" class="easyui-tabs" fit="true" border="false">
+            <div id="home" title="我的主页" data-options="iconCls:'icon-house',closable:false" style="padding:10px">
+                This is the Home content.
+            </div>
         </div>
     </div>
 </body>

@@ -1,6 +1,6 @@
 ﻿using Entity;
-using Model.ViewModel.Param;
-using Model.ViewModel.Result;
+using Entity.ViewModel.Param;
+using Entity.ViewModel.Result;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +11,7 @@ namespace IDAL
 {
     public interface IMenuDAL : IBaseDAL<Menu>
     {
-        List<MenuButtonList> GetAllMenuButton(Guid Id);
+        List<MenuButtonList> GetAllMenuButtonByRoleId(Guid Id);
+        List<UserMenuList> GetUserMenuByUserId(Guid Id,Guid? ParentId);
     }
 }

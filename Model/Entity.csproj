@@ -7,8 +7,8 @@
     <ProjectGuid>{1B27A40A-65FF-4C47-88D5-57A099102E6A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Model</RootNamespace>
-    <AssemblyName>Model</AssemblyName>
+    <RootNamespace>Entity</RootNamespace>
+    <AssemblyName>Entity</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -51,6 +51,7 @@
     <Compile Include="Button.cs" />
     <Compile Include="Department.cs" />
     <Compile Include="Icons.cs" />
+    <Compile Include="LoginIpLog.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="MenuButton.cs" />
     <Compile Include="PermissionContext.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="ViewModel\Param\RoleMenuModel.cs" />
     <Compile Include="ViewModel\Param\RoleSearch.cs" />
     <Compile Include="ViewModel\Param\UserDepartmentModel.cs" />
+    <Compile Include="ViewModel\Param\UserLogin.cs" />
     <Compile Include="ViewModel\Param\UserRoleModel.cs" />
     <Compile Include="ViewModel\Result\ButtonList.cs" />
     <Compile Include="ViewModel\Result\ComboResult.cs" />
@@ -81,6 +83,7 @@
     <Compile Include="ViewModel\Result\TreeData.cs" />
     <Compile Include="ViewModel\Result\UserList.cs" />
     <Compile Include="ViewModel\Result\UserListByRoleId.cs" />
+    <Compile Include="ViewModel\Result\UserMenuList.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

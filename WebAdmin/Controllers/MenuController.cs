@@ -1,8 +1,8 @@
 ﻿using BLL;
 using Common;
 using Entity;
-using Model.ViewModel.Param;
-using Model.ViewModel.Result;
+using Entity.ViewModel.Param;
+using Entity.ViewModel.Result;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +13,7 @@ using WebAdmin.Models;
 
 namespace WenAdmin.Controllers
 {
-    public class MenuController : Controller
+    public class MenuController : BaseAdminController
     {
         // GET: Menu
         public ActionResult Index()
@@ -63,7 +63,7 @@ namespace WenAdmin.Controllers
         public ActionResult GetAllRoleMenuButtonTree(Guid Id)
         {
           
-            var result = new MenuBLL().GetAllMenuButton(Id);
+            var result = new MenuBLL().GetAllMenuButtonByRoleId(Id);
             return Json(result,JsonRequestBehavior.AllowGet); 
         }
 
@@ -101,9 +101,9 @@ namespace WenAdmin.Controllers
                     return Json(result);
                 }
                 model.Id = Guid.NewGuid();
-                model.CreateBy = "admin";
+                model.CreateBy =Users.AccountName;
                 model.CreateTime = DateTime.Now;
-                model.UpdateBy = "admin";
+                model.UpdateBy = Users.AccountName;
                 model.UpdateTime = DateTime.Now;
                 var menu = new MenuBLL().Creat(model);
                 if (menu != null)
@@ -152,7 +152,7 @@ namespace WenAdmin.Controllers
                     result.Msg = "菜单名称不能为空";
                     return Json(result);
                 }
-                model.UpdateBy = "admin";
+                model.UpdateBy = Users.AccountName;
                 model.UpdateTime = DateTime.Now;
                 var menu = new MenuBLL().Update(model);
                 if (menu != null)

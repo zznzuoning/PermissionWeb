@@ -1,8 +1,8 @@
 ﻿using BLL;
 using Common;
 using Entity;
-using Model.ViewModel.Param;
-using Model.ViewModel.Result;
+using Entity.ViewModel.Param;
+using Entity.ViewModel.Result;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +13,7 @@ using WebAdmin.Models;
 
 namespace WenAdmin.Controllers
 {
-    public class RoleController : Controller
+    public class RoleController : BaseAdminController
     {
         // GET: Role
         public ActionResult Index()
@@ -104,9 +104,9 @@ namespace WenAdmin.Controllers
                     return Json(result);
                 }
                 model.Id = Guid.NewGuid();
-                model.CreateBy = "admin";
+                model.CreateBy = Users.AccountName;
                 model.CreateTime = DateTime.Now;
-                model.UpdateBy = "admin";
+                model.UpdateBy = Users.AccountName;
                 model.UpdateTime = DateTime.Now;
                 var role = new RoleBLL().Create(model);
                 if (role != null)
@@ -155,7 +155,7 @@ namespace WenAdmin.Controllers
                     result.Msg = "角色名称不能为空";
                     return Json(result);
                 }
-                model.UpdateBy = "admin";
+                model.UpdateBy = Users.AccountName;
                 model.UpdateTime = DateTime.Now;
                 var role = new RoleBLL().Update(model);
                 if (role != null)

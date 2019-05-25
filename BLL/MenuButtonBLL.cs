@@ -1,6 +1,6 @@
 ﻿using Entity;
 using IDAL;
-using Model.ViewModel.Param;
+using Entity.ViewModel.Param;
 using System;
 using System.Collections.Generic;
 using System.Linq;

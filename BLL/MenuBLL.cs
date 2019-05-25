@@ -1,6 +1,6 @@
 ﻿using Entity;
 using IDAL;
-using Model.ViewModel.Result;
+using Entity.ViewModel.Result;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -81,18 +81,37 @@ namespace BLL
             }
             return treeData;
         }
+        /// <summary>
+        /// 根据用户id获取对应的菜单
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <param name="ParentId"></param>
+        /// <returns></returns>
+        public List<UserMenutree> GetUserMenuByUserId(Guid Id, Guid? ParentId)
+        {
+            var userMenu = dal.GetUserMenuByUserId(Id, ParentId);
+            var tree = userMenu.Select(d => new UserMenutree
+            {
+                id = d.MenuId,
+                text = d.MenuName,
+                iconCls = d.Icon,
+                attributes = d.LinkAddress,
+                state = dal.Get().Any(x => x.ParentId == d.MenuId) ? "closed" : "open"
+            }).ToList();
+            return tree;
+        }
 
         /// <summary>
         /// 根据角色id获取所有菜单按钮
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        public List<MenuButtonTree> GetAllMenuButton(Guid Id)
+        public List<MenuButtonTree> GetAllMenuButtonByRoleId(Guid Id)
         {
 
             var list = new List<MenuButtonTree>();
-            var data = dal.GetAllMenuButton(Id);
-            
+            var data = dal.GetAllMenuButtonByRoleId(Id);
+
             var distinctMenuData = data.GroupBy(d => d.MenuId).Select(d => new DistinctMenu
             {
                 Id = d.Key,
@@ -111,12 +130,12 @@ namespace BLL
                 attributes.buttonid = item.ButtonId;
                 attributes.menuid = item.MenuId;
                 menuButton.attributes = attributes;
-                menuButton.children = RecursionMenuButton(data, distinctMenuData, item.MenuId,Id,stateStr);
+                menuButton.children = RecursionMenuButton(data, distinctMenuData, item.MenuId, Id, stateStr);
                 list.Add(menuButton);
             }
             return list;
         }
-        private List<MenuTree> RecursionMenuButton(List<MenuButtonList> data,List<DistinctMenu> menuData,Guid menuId,Guid roleId,string stateStr)
+        private List<MenuTree> RecursionMenuButton(List<MenuButtonList> data, List<DistinctMenu> menuData, Guid menuId, Guid roleId, string stateStr)
         {
             var list = new List<MenuTree>();
             var childMenu = menuData.Where(d => d.ParentId == menuId);
@@ -131,7 +150,7 @@ namespace BLL
                 attributes.buttonid = null;
                 attributes.menuid = menu.Id;
                 menuButton.attributes = attributes;
-                var buttonTree = data.Where(d=>d.MenuId==menu.Id&&d.ButtonId.HasValue);
+                var buttonTree = data.Where(d => d.MenuId == menu.Id && d.ButtonId.HasValue);
                 if (buttonTree.Any())
                 {
                     foreach (var button in buttonTree)

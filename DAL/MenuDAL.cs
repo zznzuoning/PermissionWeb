@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Entity;
 using System.Linq.Expressions;
-using Model.ViewModel.Result;
+using Entity.ViewModel.Result;
 
 namespace DAL
 {
@@ -59,7 +59,7 @@ namespace DAL
         {
             using (var db = new PermissionContext())
             {
-                var menuData = db.Menus.Where(whereLambda);
+                var menuData = db.Menus.Where(whereLambda).ToList().AsQueryable();
                 totalCount = menuData.Count();
                 switch (order)
                 {
@@ -87,7 +87,7 @@ namespace DAL
         /// </summary>
         /// <param name="Id">角色Id</param>
         /// <returns></returns>
-        public List<MenuButtonList> GetAllMenuButton(Guid Id)
+        public List<MenuButtonList> GetAllMenuButtonByRoleId(Guid Id)
         {
             using (var db = new PermissionContext())
             {
@@ -98,8 +98,8 @@ namespace DAL
                            join b in db.Buttons on new { ButtonId = mb.ButtonId } equals new { ButtonId = b.Id } into b_join
                            from b in b_join.DefaultIfEmpty()
                            join rmb in db.RoleMenuButtons
-                                 on new { mb.MenuId, mb.ButtonId, RoleId = Id }
-                             equals new { rmb.MenuId, rmb.ButtonId, RoleId = rmb.RoleId } into rmb_join
+                                 on new { mb.MenuId, ButtonId = mb.ButtonId, RoleId = Id }
+                             equals new { rmb.MenuId, ButtonId = rmb.ButtonId.Value, RoleId = rmb.RoleId } into rmb_join
                            from rmb in rmb_join.DefaultIfEmpty()
                            orderby
                              m.Sort,
@@ -118,6 +118,36 @@ namespace DAL
                              rmb.ButtonId == null ? false : true
                            };
                 return data.ToList();
+            }
+        }
+        /// <summary>
+        /// 根据用户id获取对应的菜单
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <param name="ParentId"></param>
+        /// <returns></returns>
+        public List<UserMenuList> GetUserMenuByUserId(Guid Id, Guid? ParentId)
+        {
+            using (var db = new PermissionContext())
+            {
+                var menu = (from ur in db.UserRoles
+                            join rmb in db.RoleMenuButtons on ur.RoleId equals rmb.RoleId into rmb_join
+                            from rmb in rmb_join.DefaultIfEmpty()
+                            join m in db.Menus on new { MenuId = rmb.MenuId } equals new { MenuId = m.Id } into m_join
+                            from m in m_join.DefaultIfEmpty()
+                            where
+                              ur.Users.Id == Id &&
+                              m.ParentId == ParentId
+                            orderby
+                              m.Sort
+                            select new UserMenuList
+                            {
+                                MenuId = m.Id,
+                                MenuName = m.Name,
+                                Icon = m.Icon,
+                                LinkAddress = m.LinkAddress
+                            }).Distinct();
+                return menu.ToList();
             }
         }
 

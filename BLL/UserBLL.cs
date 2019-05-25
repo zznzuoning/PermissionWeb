@@ -8,7 +8,7 @@ using DALFactory;
 using Entity;
 using IDAL;
 using System.Linq.Expressions;
-using Model.ViewModel.Result;
+using Entity.ViewModel.Result;
 
 namespace BLL
 {
@@ -67,7 +67,7 @@ namespace BLL
         {
             try
             {
-                var user = userDal.Get().FirstOrDefault(d => d.AccountName == Name);
+                var user = userDal.GetUserByName(Name);
                 return user;
             }
             catch
@@ -95,7 +95,25 @@ namespace BLL
                 throw new Exception("出现程序错误,请联系管理员！");
             }
         }
+        /// <summary>
+        /// 验证账号密码
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool ValidateUser(User model)
+        {
+            try
+            {
+                return userDal.ValidateUser(model);
+               
+            }
+            catch (Exception)
+            {
 
+                throw new Exception("出现程序错误,请联系管理员！");
+            }
+        }
+       
         /// <summary>
         /// 修改用户信息
         /// </summary>
@@ -114,5 +132,24 @@ namespace BLL
             }
 
         }
+        /// <summary>
+        /// 修改密码
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool UpdatePwd(User model)
+        {
+            try
+            {
+                return userDal.UpdatePwd(model);
+            }
+            catch
+            {
+
+                throw new Exception("出现程序错误,请联系管理员！");
+            }
+
+        }
+        
     }
 }

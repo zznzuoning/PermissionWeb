@@ -1,8 +1,8 @@
 ﻿using BLL;
 using Common;
 using Entity;
-using Model.ViewModel.Param;
-using Model.ViewModel.Result;
+using Entity.ViewModel.Param;
+using Entity.ViewModel.Result;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +13,7 @@ using WebAdmin.Models;
 
 namespace WenAdmin.Controllers
 {
-    public class ButtonController : Controller
+    public class ButtonController : BaseAdminController
     {
         // GET: Button
         public ActionResult Index()
@@ -87,9 +87,9 @@ namespace WenAdmin.Controllers
                     return Json(result);
                 }
                 model.Id = Guid.NewGuid();
-                model.CreateBy = "admin";
+                model.CreateBy = Users.AccountName;
                 model.CreateTime = DateTime.Now;
-                model.UpdateBy = "admin";
+                model.UpdateBy = Users.AccountName;
                 model.UpdateTime = DateTime.Now;
                 var button = new ButtonBLL().Create(model);
                 if (button != null)
@@ -134,7 +134,7 @@ namespace WenAdmin.Controllers
                     result.Msg = "按钮名称不能为空";
                     return Json(result);
                 }
-                model.UpdateBy = "admin";
+                model.UpdateBy = Users.AccountName;
                 model.UpdateTime = DateTime.Now;
                 var button = new ButtonBLL().Update(model);
                 if (button != null)

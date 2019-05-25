@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Model.ViewModel.Param
+namespace Entity.ViewModel.Param
 {
     public class MenuSearch : BaseSearch
     {

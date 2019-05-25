@@ -1,7 +1,7 @@
 ﻿using Entity;
 using IDAL;
-using Model.ViewModel.Param;
-using Model.ViewModel.Result;
+using Entity.ViewModel.Param;
+using Entity.ViewModel.Result;
 using System;
 using System.Collections.Generic;
 using System.Linq;

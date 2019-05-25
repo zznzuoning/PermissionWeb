@@ -1,7 +1,7 @@
 ﻿using Entity;
 using IDAL;
-using Model.ViewModel.Param;
-using Model.ViewModel.Result;
+using Entity.ViewModel.Param;
+using Entity.ViewModel.Result;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -132,21 +132,24 @@ namespace BLL
                 var isDel = dal.DelRoleMenuButtonByRoleId(model.RoleId);
                 if (isDel)
                 {
-                    foreach (var item in model.MenuButtonIds)
+                    if (model.MenuButtonIds!=null)
                     {
-                        var roleMenuButton = new RoleMenuButton
+                        foreach (var item in model.MenuButtonIds)
                         {
-                            Id = Guid.NewGuid(),
-                            RoleId = model.RoleId,
-                            ButtonId = item.buttonid,
-                            MenuId = item.menuid
-                        };
-                        var roleMenuButtons = dal.Authorize(roleMenuButton);
-                        if (roleMenuButtons == null)
-                        {
-                            throw new Exception("循环添加出现程序错误,请联系管理员！");
+                            var roleMenuButton = new RoleMenuButton
+                            {
+                                Id = Guid.NewGuid(),
+                                RoleId = model.RoleId,
+                                ButtonId = item.buttonid,
+                                MenuId = item.menuid
+                            };
+                            var roleMenuButtons = dal.Authorize(roleMenuButton);
+                            if (roleMenuButtons == null)
+                            {
+                                throw new Exception("循环添加出现程序错误,请联系管理员！");
+                            }
+
                         }
-                        
                     }
                 }
                 else

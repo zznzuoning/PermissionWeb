@@ -27,6 +27,7 @@ namespace Entity
         public DbSet<Department> Departments { get; set; }
         public DbSet<UserDepartment> UserDepartments { get; set; }
         public DbSet<Icons> Iconss { get; set; }
+        public DbSet<LoginIpLog> LoginIpLogs { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

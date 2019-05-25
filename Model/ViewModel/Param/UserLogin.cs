@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Entity.ViewModel.Param
 {
-   public  class MenuButtonModel
+    public class UserLogin
     {
-        public string MenuIds { get; set; }
-        public string ButtonIds { get; set; }
+        public string UserName { get; set; }
+        public string PassWord { get; set; }
+        public bool IsAutoLogin { get; set; }
     }
 }

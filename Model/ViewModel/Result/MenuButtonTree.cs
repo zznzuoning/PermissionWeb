@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Model.ViewModel.Result
+namespace Entity.ViewModel.Result
 {
     public class MenuButtonTree:BaseMenuButton
     {
