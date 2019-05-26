@@ -189,5 +189,17 @@ namespace WenAdmin.Controllers
                 return Json(result);
             }
         }
+        /// <summary>
+        ///  获取页面操作按钮权限
+        /// </summary>
+        /// <param name="KeyName">页面名称关键字</param>
+        /// <param name="keyCode">菜单标识码</param>
+        /// <returns></returns>
+        public ActionResult GetUserAuthorizeButton(string keyName,string keyCode)
+        {
+            var baseButtons = new ButtonBLL().GetButtonByMenuCodeAndUserId(keyCode, Users.Id);
+            var buttons = GetAuthorizeButtons(baseButtons, keyName);
+            return Json(buttons,JsonRequestBehavior.AllowGet);
+        }
     }
 }

@@ -66,6 +66,12 @@ function addTab(subtitle, url, icon) {
         $("#tabs").tabs('select', subtitle)
     }
 }
+//刷新指定选项卡
+function refreshTabs(title) {
+    if ($('#tabs').tabs('exists', title)) {
+        $('#tabs').tabs('getTab', title).panel('refresh');
+    }
+}
 //刷新选项卡
 function refreshTab() {
     var index = $('#tabs').tabs('getTabIndex', $('#tabs').tabs('getSelected'));

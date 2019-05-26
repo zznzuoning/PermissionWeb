@@ -23,7 +23,33 @@ $.extend({
         $.messager.alert(strTitle, strMsg);
     }
 });
+$.extend($.fn.datagrid.methods, {
+   
+    getToolBars: function (jq, data) {
+     
+        return jq.each(function () {
+            var panel = $(jq).datagrid('options');
+            panel.toolbar = getToolBar(data);
+           
+        });
+       
+    }
+});
 
+function get(url, param, callback) {
+    var datass = [];
+    $.ajax({
+        type: "get",
+        async: false,
+        url: url,
+        data: param,
+        dataType: 'json',
+        success: function (data) {
+            datass = data;
+        }
+    });
+    return datass;
+}
 //扩展validatebox，添加验证
 $.extend($.fn.validatebox.defaults.rules, {
     eqPwd: {
@@ -213,9 +239,9 @@ stringToList = function (value) {
 };
 
 getToolBar = function (data) {
-    if (data.toolbar != undefined && data.toolbar != '') {
+    if (data != undefined && data != '') {
         var toolbar = [];
-        $.each(data.toolbar, function (index, row) {
+        $.each(data, function (index, row) {
             var handler = row.handler;
             row.handler = function () { eval(handler); };
             toolbar.push(row);
@@ -224,6 +250,17 @@ getToolBar = function (data) {
     } else {
         return [];
     }
+}
+setToolBar=function(panels,datagrid)
+{
+    debugger
+    var panel = $(panels).panel('options');
+    var param = {
+        keyName: panel.url.split('/')[1],
+        keyCode: panel.url.split('/')[1]
+    }
+    var data = get("/Button/GetUserAuthorizeButton", param)
+    $(datagrid).datagrid("getToolBars", data);
 }
 
 

@@ -46,28 +46,10 @@
                    { field: 'UpdateTime', title: '最后更新时间', formatter: ChangeDateFormat, sortable: true, width: 130 },
                    { field: 'UpdateBy', title: '最后更新人', width: 130 }
         ]],
-        toolbar: [{
-            text: '添加',
-            iconCls: 'icon-add',
-            handler: AddUser
-        }, {
-            text: '删除',
-            iconCls: 'icon-cut',
-            handler: function () { }
-        }, '-', {
-            text: '修改',
-            iconCls: 'icon-save',
-            handler: UpdateUser
-        },
-        {
-            text: '角色设置',
-            iconCls: 'icon-user_key',
-            handler: SetUserRole
-        }, '-', {
-            text: '部门设置',
-            iconCls: 'icon-group',
-            handler: SetUserDepartment
-        }]
+        onBeforeOpen: function () {
+
+            setToolBar(this, "#ui_user_dg")
+        }
     });
 
 });

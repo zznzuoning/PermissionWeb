@@ -138,16 +138,15 @@ namespace DAL
                             where
                               ur.Users.Id == Id &&
                               m.ParentId == ParentId
-                            orderby
-                              m.Sort
                             select new UserMenuList
                             {
                                 MenuId = m.Id,
                                 MenuName = m.Name,
                                 Icon = m.Icon,
-                                LinkAddress = m.LinkAddress
+                                LinkAddress = m.LinkAddress,
+                                Sort=m.Sort
                             }).Distinct();
-                return menu.ToList();
+                return menu.OrderBy(d=>d.Sort).ToList();
             }
         }
 

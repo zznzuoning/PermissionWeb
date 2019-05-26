@@ -12,6 +12,6 @@ namespace Entity.ViewModel.Result
         public string MenuName { get; set; }
         public string LinkAddress { get; set; }
         public string Icon { get; set; }
-     
+        public int Sort { get; set; }
     }
 }

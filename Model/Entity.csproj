@@ -70,6 +70,7 @@
     <Compile Include="ViewModel\Param\UserDepartmentModel.cs" />
     <Compile Include="ViewModel\Param\UserLogin.cs" />
     <Compile Include="ViewModel\Param\UserRoleModel.cs" />
+    <Compile Include="ViewModel\Result\AuthorizeButton.cs" />
     <Compile Include="ViewModel\Result\ButtonList.cs" />
     <Compile Include="ViewModel\Result\ComboResult.cs" />
     <Compile Include="ViewModel\Result\DistinctMenu.cs" />

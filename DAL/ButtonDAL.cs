@@ -53,7 +53,7 @@ namespace DAL
 
         public IEnumerable<Button> Get<Tkey>(Expression<Func<Button, Tkey>> orderLambda, Expression<Func<Button, bool>> whereLambda, string order, int pageSize, int pageIndex, out int totalCount)
         {
-            using (var db=new PermissionContext())
+            using (var db = new PermissionContext())
             {
                 var buttonData = db.Buttons.Where(whereLambda);
                 totalCount = buttonData.Count();
@@ -78,6 +78,28 @@ namespace DAL
             }
         }
 
+        /// <summary>
+        /// 根据userid获取对应的菜单按钮权限
+        /// </summary>
+        /// <param name="menuCode"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public List<Button> GetButtonByMenuCodeAndUserId(string menuCode, Guid id)
+        {
+            using (var db = new PermissionContext())
+            {
+                var button = (from ur in db.UserRoles
+                              join rmb in db.RoleMenuButtons on ur.RoleId equals rmb.RoleId
+                              join m in db.Menus on new { MenuId = rmb.MenuId } equals new { MenuId = m.Id }
+                              join b in db.Buttons on new { ButtonId = rmb.ButtonId } equals new { ButtonId = (Guid?)b.Id }
+                              where
+                                ur.Users.Id == id &&
+                                m.Code == menuCode
+                              select b).Distinct();
+                return button.OrderBy(d=>d.Sort).ToList();
+            }
+        }
+
         public List<Icons> GetIcons()
         {
             using (var db = new PermissionContext())
@@ -93,6 +115,7 @@ namespace DAL
             {
                 var button = db.Buttons.Find(model.Id);
                 button.Name = model.Name;
+                button.Code = model.Code;
                 button.Icon = model.Icon;
                 button.Sort = model.Sort;
                 button.UpdateBy = model.UpdateBy;

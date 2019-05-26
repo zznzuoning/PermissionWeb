@@ -19,21 +19,10 @@
             { field: "UpdateBy", title: "最后更新人", width: 100 },
             { field: "Description", title: "描述", width: 200 }
         ]],
-        toolbar: [{
-            text: "添加",
-            iconCls: "icon-add",
-            handler: AddButton
-        },
-        {
-            text: "修改",
-            iconCls: "icon-save",
-            handler: UpdateButton
-        },
-        {
-            text: "删除",
-            iconCls: "icon-cut",
-            handler: DelButton
-        }]
+        onBeforeOpen: function () {
+
+            setToolBar(this, "#ui_button_dg")
+        }
     });
 });
 //添加
@@ -117,6 +106,7 @@ function UpdateButton() {
             id: "ui_button_edit_btn",
             text: "修改",
             handler: function () {
+               
                 $("#ButtonEditForm").form("submit", {
                     url: "/Button/Update",
                     onSubmit: function (param) {

@@ -27,26 +27,10 @@
               }
           },
         ]],
-        toolbar: [{
-            text: "添加",
-            iconCls: "icon-add",
-            handler: AddRole
+        onBeforeOpen: function () {
+         
+            setToolBar(this, "#ui_role_dg")
         },
-        {
-            text: "修改",
-            iconCls: "icon-save",
-            handler: UpdateRole
-        },
-        {
-            text: "删除",
-            iconCls: "icon-cut",
-            handler: function () { }
-        },
-        {
-            text: "角色授权",
-            iconCls: "icon-key",
-            handler: RoleAuthorize
-        }],
         onSelect: function (rowIndex, rowData) {
             if (oldSelectRoleId == rowData.Id) {
                 return;

@@ -126,5 +126,23 @@ namespace BLL
                 throw new Exception("出现程序错误,请联系管理员！");
             }
         }
+        /// <summary>
+        /// 根据userid获取对应的菜单按钮权限
+        /// </summary>
+        /// <param name="menuCode"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public List<Button> GetButtonByMenuCodeAndUserId(string menuCode,Guid id)
+        {
+            try
+            {
+                return dal.GetButtonByMenuCodeAndUserId(menuCode,id).Where(d=>!d.Code.Contains("search")).ToList();
+            }
+            catch (Exception)
+            {
+
+                throw new Exception("出现程序错误,请联系管理员！");
+            }
+        }
     }
 }

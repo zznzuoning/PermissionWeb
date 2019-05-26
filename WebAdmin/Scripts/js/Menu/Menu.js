@@ -20,26 +20,11 @@
             { field: "UpdateTime", title: "最后更新时间", width: 150, formatter: ChangeDateFormat },
             { field: "UpdateBy", title: "最后更新人", width: 100 }
         ]],
-        toolbar: [{
-            text: "添加",
-            iconCls: "icon-add",
-            handler: AddMenu
-        },
-        {
-            text: "修改",
-            iconCls: "icon-save",
-            handler: UpdateMenu
-        },
-        {
-            text: "删除",
-            iconCls: "icon-cut",
-            handler: DelMenu
-        },
-        {
-            text: "分配按钮",
-            iconCls: "icon-link",
-            handler: SetMenuButton
-        }]
+        onBeforeOpen: function () {
+         
+            setToolBar(this, "#ui_menu_dg")
+        }
+      
     });
 });
 //添加
@@ -178,6 +163,7 @@ UpdateMenu = function () {
 }
 //删除(支持批量删除)
 DelMenu = function () {
+    debugger
     var rows = $("#ui_menu_dg").datagrid("getChecked");
     if (rows.length < 1) {
         $.show_alert("请选择要删除的菜单");

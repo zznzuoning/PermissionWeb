@@ -10,5 +10,6 @@ namespace IDAL
     public interface IButtonDAL : IBaseDAL<Button>
     {
         List<Icons> GetIcons();
+        List<Button> GetButtonByMenuCodeAndUserId(string menuCode,Guid id);
     }
 }
