@@ -12,6 +12,8 @@ namespace Entity.ViewModel.Result
         public Guid ParentId { get; set; }
         public int Sort { get; set; }
         public string text { get; set; }
+        public string UpdateBy { get; set; }
+        public DateTime UpdateTime { get; set; }
         public List<TreeData> children { get; set; }
     }
     public class SingleTree : Singles

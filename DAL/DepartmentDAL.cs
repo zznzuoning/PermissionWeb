@@ -28,7 +28,7 @@ namespace DAL
                 var department = db.Departments.Find(id);
                 db.Departments.Remove(department);
 
-                return db.SaveChanges()>0;
+                return db.SaveChanges() > 0;
             }
         }
 
@@ -37,7 +37,7 @@ namespace DAL
             using (var db = new PermissionContext())
             {
                 var department = db.Departments.Find(id);
-               
+
 
                 return department;
             }
@@ -47,7 +47,7 @@ namespace DAL
         {
             using (var db = new PermissionContext())
             {
-                var department = db.Departments.OrderBy(d=>d.Sort).ToList();
+                var department = db.Departments.OrderBy(d => d.Sort).ToList();
 
 
                 return department;
@@ -77,7 +77,7 @@ namespace DAL
                 return departments;
             }
         }
-        public IEnumerable<Department> Get<Tkey>(Expression<Func<Department, Tkey>> orderLambda, Expression<Func<Department, bool>> whereLambda, string order,int pageSize, int pageIndex, out int totalCount)
+        public IEnumerable<Department> Get<Tkey>(Expression<Func<Department, Tkey>> orderLambda, Expression<Func<Department, bool>> whereLambda, string order, int pageSize, int pageIndex, out int totalCount)
         {
             throw new NotImplementedException();
         }
@@ -87,9 +87,42 @@ namespace DAL
             using (var db = new PermissionContext())
             {
                 var department = db.Departments.Find(model.Id);
-                department = model;
+                department.Name = model.Name;
+                department.Sort = model.Sort;
+                department.UpdateBy = model.UpdateBy;
+                department.UpdateTime = model.UpdateTime;
                 db.SaveChanges();
                 return department;
+            }
+        }
+        /// <summary>
+        /// 根据部门id获取用户
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public List<User> GetUserByDepartmenId(Guid[] ids)
+        {
+            using (var db = new PermissionContext())
+            {
+                var user = db.UserDepartments
+                    .Where(d => ids.Any(x => x == d.DepartmentId))
+                    .OrderBy(d=>d.Users.CreateBy)
+                    .Select(d => d.Users)
+                    .Distinct()
+                    .ToList();
+                return user;
+            }
+        }
+        /// <summary>
+        /// 根据部门名称获取部门数量
+        /// </summary>
+        /// <param name="Name"></param>
+        /// <returns></returns>
+        public int GetDepartmentByName(string Name)
+        {
+            using (var db=new PermissionContext())
+            {
+                return db.Departments.Count(d => d.Name == Name);
             }
         }
     }

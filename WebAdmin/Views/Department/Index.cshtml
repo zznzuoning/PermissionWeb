@@ -1,0 +1,32 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>部门管理</title>
+    <link href="~/Scripts/jquery-easyui-1.4.4/themes/bootstrap/easyui.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-easyui-1.4.4/jquery.min.js"></script>
+    <script src="~/Scripts/jquery-easyui-1.4.4/jquery.easyui.min.js"></script>
+    <script src="~/Scripts/jquery-easyui-1.4.4/locale/easyui-lang-zh_CN.js"></script>
+    <link href="~/Content/themes/icon.css" rel="stylesheet" />
+    <script src="~/Content/js/common.js"></script>
+    <script src="~/Scripts/js/Department/Department.js"></script>
+    <link href="~/Content/themes/table.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="ui_department_layout" class="easyui-layout" data-options="fit:true,border:false">
+        <div data-options="region:'east',split:true,border:true,collapsed:true" title="部门成员"
+             style="width: 480px;">
+            <table id="ui_department_user_dg" data-options="fit:true,border:false"></table>
+        </div>
+        <div data-options="region:'center',border:false">
+            <table id="ui_department_tg" data-options="fit:true,border:false"></table>
+        </div>
+    </div>
+
+</body>
+</html>

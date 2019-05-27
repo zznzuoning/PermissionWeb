@@ -63,6 +63,7 @@
     <Compile Include="UserRole.cs" />
     <Compile Include="ViewModel\Param\BaseSearch.cs" />
     <Compile Include="ViewModel\Param\ButtonSearch.cs" />
+    <Compile Include="ViewModel\Param\GetUserByDepartmentId.cs" />
     <Compile Include="ViewModel\Param\MenuButtonModel.cs" />
     <Compile Include="ViewModel\Param\MenuSearch.cs" />
     <Compile Include="ViewModel\Param\RoleMenuModel.cs" />

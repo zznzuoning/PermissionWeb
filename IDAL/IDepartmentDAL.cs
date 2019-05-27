@@ -10,5 +10,7 @@ namespace IDAL
     public interface IDepartmentDAL :IBaseDAL<Department>
     {
         List<Department> GetDepartmentByUserId(Guid id);
+        List<User> GetUserByDepartmenId(Guid[] ids);
+        int GetDepartmentByName(string Name);
     }
 }

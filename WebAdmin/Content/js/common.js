@@ -253,11 +253,10 @@ getToolBar = function (data) {
 }
 setToolBar=function(panels,datagrid)
 {
-    debugger
-    var panel = $(panels).panel('options');
+    var panel = $(panels).get(0);
     var param = {
-        keyName: panel.url.split('/')[1],
-        keyCode: panel.url.split('/')[1]
+        keyName: panel.baseURI.split('/')[3],
+        keyCode: panel.baseURI.split('/')[3]
     }
     var data = get("/Button/GetUserAuthorizeButton", param)
     $(datagrid).datagrid("getToolBars", data);
